@@ -97,7 +97,7 @@ call vundle#end()            " required
 "============== Color Settings ===============
 set t_Co=256
 set background=dark
-color desertink
+" color desert
 " color mod8
 " color mango
 " color mango
@@ -134,7 +134,7 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 " replace all tabs with 4 space when saving the code
 autocmd bufnewfile,bufwritepre *.R,*.sh exe "1," . "$" . "s/\t/    /g"
 autocmd bufwritepre,filewritepre *.r,*.R,*.sh execute "normal mb"
-autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
+" autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
@@ -396,7 +396,7 @@ nmap ga <Plug>(EasyAlign)
 " lintr via syntastic plugin
 "----------------------------------------------------------------------------
 let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_r_checkers = ['lintr']
+" let g:syntastic_r_checkers = ['lintr']
 
 "}}}
 
