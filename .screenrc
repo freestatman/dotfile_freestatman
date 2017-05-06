@@ -1,0 +1,24 @@
+sorendition "+b kG"
+
+startup_message off
+vbell off
+autodetach on
+altscreen on
+shelltitle "$ |bash"
+defscrollback 10000
+#defutf8 on
+nonblock on
+hardstatus alwayslastline
+
+hardstatus string "%{Yb}%-w%{} %{kG} %n %f %t %{-} %+w %=%H %{kG} %l %{-} %Y/%m/%d %c:%s "
+nethack on
+defnonblock 1
+bind j focus down
+bind k focus up
+
+
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+

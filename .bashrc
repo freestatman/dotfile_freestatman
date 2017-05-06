@@ -593,3 +593,18 @@ set -o vi
 tmux
 #}}}
 
+# render rmarkdown file {{{
+function rmd
+{
+    module load R/3.3.2
+    echo "rmarkdown::render('$1')" | R --vanilla --slave
+}
+
+#}}}
+
+# history {{{
+export HISTSIZE=100000
+export HISTFILESIZE=2000
+#}}}
+
+

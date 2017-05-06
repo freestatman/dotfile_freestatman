@@ -1,0 +1,17 @@
+snippet options
+	options mprint mlogic mtrace merror
+	noovp fullstimer
+	ls=145 ps=40 
+	formchar = '|----|+|---+=|-/\<>*'
+	yearcutoff=1920   fmtsearch=(exe)
+	nosyntaxcheck noquotelenmax mergenoby=warn;
+
+snippet options1
+	options nodate nonumber topmargin=1in bottommargin=1in leftmargin=1in rightmargin=1in orientation = landscape; 
+
+snippet macro
+	%macro ${1:FunName}(${2:args});
+		${3:let's party};
+	%medn $1;
+
+

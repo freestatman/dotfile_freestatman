@@ -331,7 +331,7 @@ nmap ff :exe "tabn ".g:lasttab<CR>   " jungle between tabs
 
 nmap <C-j> :tabnext<CR>
 nmap <C-k> :tabprevious<CR>
-nmap <C-n> :tabnew
+nmap <C-n> :tabnew  
 noremap <F7> :set expandtab!<CR>
 
 "----------------------------------------------------------------------------

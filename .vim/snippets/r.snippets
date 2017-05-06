@@ -1,0 +1,298 @@
+snippet #!
+	#!/usr/bin/env Rscript
+
+# includes
+snippet lib
+	#---- libs
+	library(data.table)
+	library(plyr)
+	library(tidyverse)
+	options(tibble.width = Inf)
+	theme_set(theme_bw())
+
+snippet path
+	#---- path
+	options(error=recover)
+	baspath <- '$1'
+	statues <- '${3:dev}'
+	outpath <- file.path(baspath, 'output', statues)
+	datpath <- file.path(baspath, 'data', statues)
+	prog <- '$2'
+
+snippet library
+	library(${1:lib})
+snippet install
+	install.packages("${1:lib}")
+snippet req
+	require(${1:package})
+snippet source
+	source('${1:file}')
+
+snippet on.exit
+	on.exit(${1:express})${2}
+
+# regular functions
+snippet head
+	head(${1:obj})${2}
+snippet dim 
+	dim(${1:obj})${2}
+snippet paste0
+	paste0(${1:obj})${2}
+snippet unique
+	unique(${1:obj})${2}
+snippet length
+	length(${1:obj})${2}
+snippet	union 
+	union(${1:obj}, ${2:obj}) ${3}
+snippet	intersect
+	intersect(${1:obj}, ${2:obj}) ${3}
+snippet setdiff
+	setdiff(${1:obj}, ${2:obj}) ${3}
+snippet cor
+	cor(${1:mat}, use='pairwise.complete.obs')^2
+
+snippet range
+	range(${1:obj}, na.rm=TRUE)${2}
+snippet sum
+	sum(${1:obj}, na.rm=TRUE)${2}
+snippet colSums
+	colSums(${1:obj}, na.rm=TRUE)${2}
+snippet colMeans
+	colMeans(${1:obj}, na.rm=TRUE)${2}
+snippet rowMeans
+	rowMeans(${1:obj}, na.rm=TRUE)${2}
+snippet	sd
+	sd(${1:obj}, na.rm=TRUE)${2}
+snippet mean
+	mean(${1:obj}, na.rm=TRUE)${2}
+snippet ifelse
+	ifelse(${1:obj}, ${2:obj}, ${3:obj})${4}
+snippet function
+	function(${1:obj}){
+		${2}
+	}${2}
+snippet get
+	get(${1:obj})${2}
+snippet exist
+	exist(${1:obj})${2}
+
+# conditionals
+snippet if
+	if (${1:condition}) {
+		${2}
+	}${3}
+
+snippet ift
+	if (TRUE)  {     # ${1:}
+		${2}
+	}    # End $1
+
+snippet iff
+	if (FALSE) {    # ${1:spot check}
+		${2}
+	}    # End $1
+
+
+snippet el
+	else {
+		${1}
+	}
+snippet ei
+	else if (${1:condition}) {
+		${2}
+	}${3}
+
+snippet for 
+	for (${1:x} in ${2:c()}) {
+		${3:do}
+	}
+
+# i/o files
+snippet readlines
+	readLines(file.path(${1}), ${2:n=-1})
+snippet read.x
+	read.xlsx(file.path(${1}), sheetIndex=1, stringsAsFactors=FALSE)
+snippet fread
+	fread(file.path(${1}), header=TRUE, stringsAsFactors=FALSE)
+snippet read.t
+	read.table(file.path(${1}), header=TRUE, sep='\t', stringsAsFactors=FALSE)
+snippet read.c
+	read.csv(file.path(${1}), stringsAsFactors=FALSE)
+snippet write.t
+	write.table(${1}, file=file.path(${2}), row.names=FALSE, sep='\t', quote=FALSE)
+snippet write.c
+	write.csv(${1}, file=file.path(${2}), row.names=FALSE)
+snippet load 
+	(load(file=file.path(${1}), envir=${2}.GlobalEnv))
+snippet scan 
+	scan(file=file.path(${1}), what=character())
+snippet save
+	save(${1}, file=file.path(${2}))
+snippet save.img
+	save.img(file=file.path(${1}))
+
+# regular functions
+snippet paste
+	paste(${1}, sep='')
+snippet fun
+	${1:name} = function (${2:variables}) {
+		${3}
+	}
+snippet return
+	return(${1})
+snippet merge
+	merge(${1:df1}, ${2:df2}, by=intersect(names($1), names($2)), all.x=T, sort=F)${3}
+snippet merge1
+	merge(${1:df1}, ${2:df2}, by='${3}', all.x=T, sort=F, suffixes=c('','.y'))${4}
+snippet strsplit
+	strsplit(${1}, split='${2}')${3}
+snippet table
+	table(${1}, useNA='ifany')${3}
+snippet with 
+	with(${1:df}, ${2:sth})${3}
+
+# comment
+snippet cl
+	#---- ${1} ----
+
+snippet cb
+	#-----------------------------------------------------------------------------
+	#---- ${1} 
+	#-----------------------------------------------------------------------------
+
+snippet cbb
+	##############################################################################
+	#	${1}
+	##############################################################################
+
+# dataframes, lists, etc
+snippet df
+	${1:name}[${2:rows}, ${3:cols}]
+snippet c
+	c(${1:items})
+snippet list
+	list(${1:items})
+snippet mat
+	matrix(${1:data}, nrow=${2:rows}, ncol=${3:cols})
+
+# apply functions
+snippet apply
+	apply(${1:array}, ${2:2}, ${3:function(x) {}})
+snippet lapply
+	lapply(${1:list}, ${2:function})
+snippet sapply
+	lapply(${1:list}, ${2:function(x) {}})
+snippet vapply
+	vapply(${1:list}, ${2:function}, ${3:type})
+snippet mapply
+	mapply(${1:function}, ${2:...})
+snippet tapply
+	tapply(${1:vector}, ${2:index}, ${3:function})
+snippet rapply
+	rapply(${1:list}, ${2:function})
+
+# plyr functions
+snippet dd
+	ddply(${1:frame}, ${2:variables}, ${3:function})
+snippet dl
+	dlply(${1:frame}, ${2:variables}, ${3:function})
+snippet da
+	daply(${1:frame}, ${2:variables}, ${3:function})
+snippet d_
+	d_ply(${1:frame}, ${2:variables}, ${3:function})
+
+snippet ad
+	adply(${1:array}, ${2:margin}, ${3:function})
+snippet al
+	alply(${1:array}, ${2:margin}, ${3:function})
+snippet aa
+	aaply(${1:array}, ${2:margin}, ${3:function})
+snippet a_
+	a_ply(${1:array}, ${2:margin}, ${3:function})
+
+snippet ld
+	ldply(${1:list}, ${2:function})
+snippet ll
+	llply(${1:list}, ${2:function})
+snippet la
+	laply(${1:list}, ${2:function})
+snippet l_
+	l_ply(${1:list}, ${2:function})
+
+snippet	md
+	mdply(${1:matrix}, ${2:function})
+snippet	ml
+	mlply(${1:matrix}, ${2:function})
+snippet	ma
+	maply(${1:matrix}, ${2:function})
+snippet	m_
+	m_ply(${1:matrix}, ${2:function})
+
+# plot functions
+snippet pl
+	plot(${1:x}, ${2:y})
+snippet ggplot
+	ggplot(${1:data}, aes(${2:aesthetics}))
+snippet ggsave
+	ggsave(${1:p}, file=file.path(${2:filename}), width=${3:6}, height=${4:6})
+
+snippet axis.text.x
+	theme(axis.text.x = element_text(size=${1:6}, angle=${2:30}, vjust = 1, hjust=0.5)) +
+
+snippet img
+	${1:(pdf,jpeg,bmp,png,tiff)}(filename="${2:filename}", width=${3:6}, height=${4:6}, unit="${5:in}")
+	${6:plot}
+	dev.off()
+snippet png
+	png(filename=file.path(${1:filename}), width=${2:6}, height=${3:6}, unit="in", res=300)
+	${4:plot}
+	dev.off()
+snippet pdf
+	pdf(file=file.path(${1:filename}), width=${2:6}, height=${3:6})
+	${4:plot}
+	dev.off()
+
+# dplyr functions
+snippet	left
+	left_join(${1:condition}) ${2:%>%}
+snippet	group_by
+	group_by(${1:condition}) ${2:%>%}
+snippet	filter 
+	dplyr::filter(${1:condition}) ${2:%>%}
+snippet	select
+	dplyr::select(${1:vars}) ${2:%>%}
+snippet	arrange
+	dplyr::arrange(${1:vars}) ${2:%>%}
+snippet	mutate
+	dplyr::mutate(${1:vars}) ${2:%>%}
+snippet	rename
+	dplyr::rename(${1:vars}) ${2:%>%}
+snippet %
+	%>%
+	${1:}
+snippet count
+	dplyr::count(${1:vars})
+snippet count1
+	plyr::count(${1:obj}, .(${2:var}))
+
+# purrr functions
+snippet	map
+	purrr::map(${1:vars}) ${2:%>%}
+
+
+
+# statistical test functions
+#snippet fis
+	#fisher.test(${1:x}, ${2:y})
+#snippet chi
+	#chisq.test(${1:x}, ${2:y})
+#snippet tt
+	#t.test(${1:x}, ${2:y})
+#snippet wil
+	#wilcox.test(${1:x}, ${2:y})
+#snippet cor
+	#cor.test(${1:x}, ${2:y})
+#snippet fte
+	#var.test(${1:x}, ${2:y})
+#snippet kvt
+	#kv.test(${1:x}, ${2:y})
