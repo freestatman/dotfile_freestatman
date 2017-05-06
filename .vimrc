@@ -319,7 +319,7 @@ nmap <leader>al= :Align= <CR>
 :nmap qa :qa<CR>
 :imap jj <ESC>
 :nmap vv vi{=<CR>
-:nmap vv "*y
+:vmap vv "*y
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
