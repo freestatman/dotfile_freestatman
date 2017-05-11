@@ -61,29 +61,30 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Bundle 'altercation/vim-colors-solarized'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'ascenator/L9', {'name': 'newL9'}
+"Bundle 'altercation/vim-colors-solarized'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'chrisbra/Colorizer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/screen'
-Plugin 'garbas/vim-snipmate'
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'honza/vim-snippets'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'mattn/emmet-vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Plugin 'junegunn/vim-easy-align'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'tpope/vim-commentary'
+"Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-surround'
 " Plugin 'valloric/youcompleteme'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'jaxbot/browserlink.vim'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-syntastic/syntastic'
+"Plugin 'jaxbot/browserlink.vim'
 Plugin 'tmhedberg/SimpylFold'
 
 
@@ -331,7 +332,7 @@ nmap ff :exe "tabn ".g:lasttab<CR>   " jungle between tabs
 
 nmap <C-j> :tabnext<CR>
 nmap <C-k> :tabprevious<CR>
-nmap <C-n> :tabnew  
+nmap <C-n> :tabnew   
 noremap <F7> :set expandtab!<CR>
 
 "----------------------------------------------------------------------------
@@ -386,10 +387,10 @@ let vimrplugin_assign = 0
 " easyAlign
 "----------------------------------------------------------------------------
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
 
 
 "----------------------------------------------------------------------------
@@ -434,18 +435,20 @@ hi Search cterm=NONE ctermfg=grey ctermbg=blue
 " recording macros is not my thing
   map q <Nop>
 
-" copy current files path to clipboard
-  nmap cp :let @+ = expand("%") <cr>
+" copy current files path to reg 0 and paste at the current cursor
+  nmap cp :let @0 = expand("%") <cr>"0p 
 
   inoremap <c-f> <c-x><c-f>
-" Copy to osx clipboard
-  vnoremap <C-c> "*y<CR>
-  vnoremap y "*y<CR>
-  nnoremap Y "*Y<CR>
+  " Copy to osx clipboard (maynot work for Linux env)
+  "  vnoremap <C-c> "*y<CR>
+  "  vnoremap y "*y<CR>
+  "  nnoremap Y "*Y<CR>
+  
   let g:multi_cursor_next_key='<C-n>'
   let g:multi_cursor_prev_key='<C-p>'
   let g:multi_cursor_skip_key='<C-x>'
   let g:multi_cursor_quit_key='<Esc>'
 
 "}}}
+
 
