@@ -62,15 +62,18 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 "Bundle 'altercation/vim-colors-solarized'
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
+
+"snippet related plugins
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
 "Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'chrisbra/Colorizer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/screen'
 "Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'honza/vim-snippets'
 "Plugin 'junegunn/vim-easy-align'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'pangloss/vim-javascript'
