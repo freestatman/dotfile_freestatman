@@ -3,10 +3,26 @@
 sudo apt-get update
 sudo apt-get install pandoc
 sudo apt-get install vim
+sudo apt-get install vim-gnome # for +xterm_clipboard
 sudo apt-get install tmux
 sudo apt-get install git
 sudo apt-get install python
 sudo apt-get install python3-pip
+
+# for install neovim in unbuntu
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim
+mkdir -p ~/.config/nvim/
+echo "
+set runtimepath+=~/.vim,~/.vim/after
+set packpath+=~/.vim
+source ~/.vimrc
+" > ~/.config/nvim/init.vim
+
+# config neovim
+
 
 # install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
