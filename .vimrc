@@ -137,7 +137,7 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 " replace all tabs with 4 space when saving the code
 autocmd bufnewfile,bufwritepre *.R,*.sh exe "1," . "$" . "s/\t/    /g"
 autocmd bufwritepre,filewritepre *.r,*.R,*.sh execute "normal mb"
-" autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
+autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
 autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
@@ -436,23 +436,27 @@ hi Search cterm=NONE ctermfg=grey ctermbg=blue
 " repo  : https://github.com/mhartington/dotfiles/
 
 " No need for ex mode
-  nnoremap Q <nop>
+nnoremap Q <nop>
 " recording macros is not my thing
-  map q <Nop>
+map q <Nop>
 
 " copy current files path to reg 0 and paste at the current cursor
-  nmap cp :let @0 = expand("%") <cr>"0p 
+nmap cp :let @0 = expand("%") <cr>"0p 
 
-  inoremap <c-f> <c-x><c-f>
-  " Copy to osx clipboard (maynot work for Linux env)
-  "  vnoremap <C-c> "*y<CR>
-  "  vnoremap y "*y<CR>
-  "  nnoremap Y "*Y<CR>
-  
-  let g:multi_cursor_next_key='<C-n>'
-  let g:multi_cursor_prev_key='<C-p>'
-  let g:multi_cursor_skip_key='<C-x>'
-  let g:multi_cursor_quit_key='<Esc>'
+
+" clipboard
+set clipboard=unnamedplus
+
+inoremap <c-f> <c-x><c-f>
+" Copy to osx clipboard (maynot work for Linux env)
+"  vnoremap <C-c> "*y<CR>
+"  vnoremap y "*y<CR>
+"  nnoremap Y "*Y<CR>
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 "}}}
 

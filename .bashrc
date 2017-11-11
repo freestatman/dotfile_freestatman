@@ -106,7 +106,7 @@ alias hl2='head -v `ls -t|head -n2`'
 #alias tl='tail -v `ls -t|head -n1`'
 #alias tl2='tail -v `ls -t|head -n2`'
 alias wl='wc -l'
-alias top='top -ha'
+#alias top='top -h'
 alias xi='xargs -I []'
 
 alias b='cd -'
