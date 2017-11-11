@@ -44,3 +44,9 @@ ln -f .bashrc ~/
 ln -f .tmux.conf ~/
 
 
+# install i3 window manager
+# after the installation, log out and log back in
+sudo apt update
+sudo apt install i3
+sudo apt-get install arandr # GUI for setting moniter resolution
+
