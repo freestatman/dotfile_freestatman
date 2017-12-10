@@ -1,0 +1,52 @@
+#!/usr/bin/Rscript
+#
+# Description: cmd line as a R/styler wrapper tool, for quickly style up single R script, and automate archiving and comparison.
+# Author: Freeman (Shuaicheng) Wang
+# Date: 2017-12-10
+
+load_get_pkg <- function(x) {
+    if (!require(x, character.only = TRUE, quietly = TRUE)) {
+        install.packages(x, repos = "http://cran.rstudio.com", dep = TRUE)
+        if (!require(x, character.only = TRUE, quietly = TRUE)) stop("Package not found")
+    }
+}
+
+'%+%' <- function(x, y) paste0(x, y)
+
+load_get_pkg("argparser")
+load_get_pkg("styler")
+
+# Create a parser
+# Add command line arguments
+p <- arg_parser("Styler command: Non-invasive pretty printing of R code ")
+p <- add_argument(p, "rfile", help = "Input R script to style up", type = "character")
+p <- add_argument(p, "--arch", help = "Backup script suffix", default = "arch")
+
+
+if (!inherits(try(parse_args(p), silent = TRUE), "try-error")) {
+    argv <- parse_args(p)
+
+    format(Sys.time(), "%Y%m%d_%s")
+    arch_suff <- argv$arch %+% '_' %+% format(Sys.time(), "%Y%m%d_%s")
+
+    dir.create('archived', mode='770', showWarnings=FALSE)
+    rfile_arch <- gsub("\\.[r|R]$", paste0("_", arch_suff, ".R"), argv$rfile)
+    rfile_arch <- file.path('archived', rfile_arch)
+    rfile <- argv$rfile
+
+    file.rename(rfile, rfile_arch)
+    file.copy(rfile_arch, rfile, overwrite = TRUE)
+
+    tidyverse_style_swa <- function(...) tidyverse_style(indent_by = 4, ...)
+    styler::style_file(rfile, style = tidyverse_style_swa)
+
+    message("Old script has been archived to " %+% rfile_arch)
+    message("compare styled scripts: new vs old")
+    message(paste0("vimdiff ", rfile, " ", rfile_arch))
+
+    #write.table(paste0("vimdiff ", rfile, " ", rfile_arch), 'clipboard', col.names=FALSE) # not work on Unix
+    system(paste0("vimdiff ", rfile, " ", rfile_arch))
+}
+
+quit(save = "no")
+
