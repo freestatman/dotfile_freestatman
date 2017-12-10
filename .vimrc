@@ -335,6 +335,10 @@ nmap <leader>al= :Align= <CR>
 :nmap vv vi{=<CR>
 :vmap vv "*y
 
+command WQ wq
+command Wq wq
+command W w
+command Q q
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs
