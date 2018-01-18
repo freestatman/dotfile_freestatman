@@ -19,7 +19,7 @@
     set shiftwidth=4
     set softtabstop=4
     set mouse=a        " Enable mouse usage (all modes)
-    set ttymouse=xterm2
+    "set ttymouse=xterm2
     set cindent
     set cursorline        " show the highlight of the current line
     set ruler        " show the cursor position all the time
@@ -64,6 +64,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Bundle 'altercation/vim-colors-solarized'
 
 "snippet related plugins
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
@@ -323,7 +324,7 @@ nmap <leader>al= :Align= <CR>
 :nmap qa :qa<CR>
 :imap jj <ESC>
 :nmap vv vi{=<CR>
-:vmap vv "*y
+:vmap vv "+y
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

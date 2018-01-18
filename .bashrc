@@ -608,3 +608,6 @@ export HISTFILESIZE=2000
 #}}}
 
 
+# restart the network
+# sudo service network-manager restart
+
