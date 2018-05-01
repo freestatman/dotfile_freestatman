@@ -63,6 +63,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Bundle 'altercation/vim-colors-solarized'
 
 "snippet related plugins
+Plugin 'vim-pandoc/vim-rmarkdown'
+Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
