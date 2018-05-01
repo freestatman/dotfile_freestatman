@@ -48,7 +48,7 @@
 " }}}
 
 
-" Vunde {{{
+" Vundle {{{
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -183,13 +183,13 @@ autocmd FileType sh nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR
 "nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 "nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
 
-autocmd FileType r,R  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
+autocmd FileType r,R,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
 
 " awesome updated version of \h
 "nmap <Leader>h "zyiw :call ScreenShellSend("as_data_frame(".@z .")")<CR>
