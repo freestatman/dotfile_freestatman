@@ -611,3 +611,22 @@ export HISTFILESIZE=2000
 # restart the network
 # sudo service network-manager restart
 
+# docker {{{
+alias dps='sudo docker ps'
+alias dimg='sudo docker images'
+alias dpsa='sudo docker ps -a'
+alias dstop='sudo docker ps -q | xi docker stop []'
+alias drm='sudo docker ps -a -q | xi docker rm []'
+alias dup='sudo docker-compose up'
+
+#}}}
+
+# nginx {{{
+alias ngt='sudo nginx -t'
+alias ngrestart='sudo systemctl restart nginx'
+alias ngstart='sudo systemctl start nginx'
+alias ngstop='sudo nginx -s stop'
+alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
+alias ngconfd='cd /etc/nginx/conf.d; ls'
+
+#}}}
