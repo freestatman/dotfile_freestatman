@@ -615,8 +615,10 @@ export HISTFILESIZE=2000
 alias dps='sudo docker ps'
 alias dimg='sudo docker images'
 alias dpsa='sudo docker ps -a'
-alias dstop='sudo docker ps -q | xi docker stop []'
-alias drm='sudo docker ps -a -q | xi docker rm []'
+alias drm='sudo docker rm '
+alias dstop='sudo docker stop '
+alias drmall='sudo docker ps -a -q | xi docker rm []'
+alias dstopall='sudo docker ps -q | xi docker stop []'
 alias dup='sudo docker-compose up'
 
 #}}}
