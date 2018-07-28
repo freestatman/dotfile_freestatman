@@ -254,11 +254,6 @@ if (FALSE) {    # test fmtNum()
 # read in data from SDD/CLUWE
 #----------------------------------------------------------------------------
 rm_sas_df_label <<- cnvt_sas_numeric_col <<- function(dat){
-    if (FALSE) {    # debug
-        dat <- haven::read_sas('/lrlhps/data/ttx_projects/onc/tgfbeta/JBAI/data/prd/sdtm/be.sas7bdat')
-        dat <- dat %>% dplyr::select(USUBJID, DOMAIN)
-    }    # End debug
-
     (num.col <- sapply(dat, is.numeric))
     df <- dat %>% as.matrix %>% as.data.frame(stringsAsFactors=FALSE)
     df[, num.col] <- sapply(df[, num.col], as.numeric)
@@ -266,7 +261,7 @@ rm_sas_df_label <<- cnvt_sas_numeric_col <<- function(dat){
     return(df)
 }
 
-read.csv_sas <<- function(file, header=TRUE, nrow=-1, comment.char="", stringsAsFactors=FALSE, ...){
+read.csv_sas <- function(file, header=TRUE, nrow=-1, comment.char="", stringsAsFactors=FALSE, ...){
     is.sas <- grepl('.sas7bdat$', file, fixed=FALSE)
     is.csv <- grepl('.csv$', file, fixed=FALSE)
     is.rds <- grepl('.rds$', file, fixed=FALSE)
@@ -339,18 +334,10 @@ import_sdd_dat_swa <- function(path.data, infile, sdd='https://sddchippewa.sas.c
 
 import_cluwe_dat_swa <- function(path.data,  
                                  infile,
-                                 cluwe='gridpmgr01.am.lilly.com',
+                                 cluwe='',
                                  verbose=FALSE,
                                  ...){ #{{{
-    if (FALSE) {    # debug
-        cluwe='gridpmgr01.am.lilly.com'
-        (my.tempdir <- '~/' %+% (tempdir() %>% strsplit(split='/') %>% unlist %>% tail(1)))
-        infile      <- 'adsl.sas7bdat'
-        path.data <- '/lillyce/prd/ly2157299/h9h_mc_jbaj/csr1/data/analysis/shared/adam/'
-
-        adsl <- import_cluwe_dat_swa(path.data, infile, verbose=T)
-    }    # End debug
-
+   
     (is.sas <- grepl('.sas7bdat$', infile, fixed=FALSE))
     (is.csv <- grepl('.csv$', infile, fixed=FALSE))
 
