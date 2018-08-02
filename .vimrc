@@ -45,6 +45,9 @@
     set showtabline=2 " always tabs visible
     " set mouse=a Enable mouse usage (all modes)
     set foldmethod=marker
+
+    set autoread
+
 " }}}
 
 
@@ -135,15 +138,16 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 " Auto header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " replace all tabs with 4 space when saving the code
-autocmd bufnewfile,bufwritepre *.R,*.sh exe "1," . "$" . "s/\t/    /g"
-autocmd bufwritepre,filewritepre *.r,*.R,*.sh execute "normal mb"
-autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
-autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
-autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
-autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
-autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
-autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^scode=.*/s/scode=.*/scode=".expand("%")
-autocmd bufwritepost,filewritepost *.R,*.sh execute "normal `b"
+
+"  autocmd bufnewfile,bufwritepre *.r,*.R,*.sh exe "1," . "$" . "s/\t/    /g"
+"  autocmd bufwritepre,filewritepre *.r,*.R,*.sh execute "normal mb"
+"  autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," . "20" .  "g/Program:.*/s/Program:.*/Program:\t".expand("%")
+"  autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
+"  autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
+"  autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/rcode=.*/rcode=".expand("%")
+"  autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^rcode=.*/s/sh$/R"
+"  autocmd bufnewfile,Bufwritepre *.sh exe "1," . "$" . "g/^scode=.*/s/scode=.*/scode=".expand("%")
+"  autocmd bufwritepost,filewritepost *.R,*.sh execute "normal `b"
 
 " }}}
 

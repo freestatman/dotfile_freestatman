@@ -96,6 +96,7 @@ alias tree='tree -Csu'          # nice alternative to 'ls'
 
 alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
+alias fishrc='vim ~/.config/fish/config.fish'
 alias last='vim `ls -t|head -n1`'
 alias last2='vim -O `ls -t|head -n2`'
 alias last3='vim -p `ls -t|head -n3`'
@@ -607,4 +608,37 @@ export HISTSIZE=100000
 export HISTFILESIZE=2000
 #}}}
 
+# docker {{{
+alias drun='docker run --rm  '
+alias dps='docker ps -a '
+alias drm='docker rm '
+alias dstart='docker start '
+alias dstop='docker stop '
+#}}}
 
+
+# automatically ls after cd
+cd() { builtin cd "$@" && ls; }
+
+
+# Make less work with BAM files
+original_less=`which less`
+less()
+{
+    regex="[[:graph:]]+\.bam($|[[:space:]])"
+    if [[ $@ =~ $regex ]]
+    then
+        samtools view $@ | $original_less
+    else
+        eval $original_less $@
+    fi
+}
+
+
+alias cluster='ssh swa@192.168.1.80'
+
+
+diff_dev_prd()
+{
+    find -maxdepth 1 -name \*R | xi diff [] $1/[]
+}

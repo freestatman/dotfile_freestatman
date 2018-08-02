@@ -1,0 +1,103 @@
+
+fish_vi_key_bindings 
+
+
+# alias {{{
+#-------------------
+# Personnal Aliases
+#-------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i' # Prevents accidentally clobbering files.
+alias c='clear; ls -hF --color=auto'
+alias mkdir='mkdir -p'
+alias h='history'
+alias j='jobs -l'
+# The 'ls' family (this assumes you use the GNU ls)
+alias ll="ls -alF --color=auto"
+alias la='ls -Al'               # show hidden files
+alias ls='ls -ahF --color=auto' # add colors for filetype recognition
+alias lx='ls -lXB'              # sort by extension
+alias lk='ls -lSr'              # sort by size
+alias lc='ls -lcr'              # sort by change time
+alias lu='ls -lur'              # sort by access time
+alias lt='ls -altr'             # sort by date
+alias ltt='ls -altr | tail'     # sort by date
+alias l='ls -altr'              # sort by date
+alias lm='ls -al |more'         # pipe through 'more'
+alias tree='tree -Csu'          # nice alternative to 'ls'
+
+alias vimrc='vim ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
+alias fishrc='vim ~/.config/fish/config.fish'
+alias last='vim `ls -t|head -n1`'
+alias last2='vim -O `ls -t|head -n2`'
+alias last3='vim -p `ls -t|head -n3`'
+alias cl='cat `ls -t|head -n1`'
+alias cl2='cat `ls -t|head -n2`'
+alias hl='head -v `ls -t|head -n1`'
+alias hl2='head -v `ls -t|head -n2`'
+#alias tl='tail -v `ls -t|head -n1`'
+#alias tl2='tail -v `ls -t|head -n2`'
+alias wl='wc -l'
+#alias top='top -h'
+alias xi='xargs -I []'
+
+alias b='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .4='cd ../../..'
+alias .5='cd ../../../..'
+
+#----- Screen -----
+alias sr="screen -r "
+alias ss="screen -S "
+alias sl="screen -ls "
+alias sx="screen -x "
+alias cleanscreen="screen -ls | tail -n +2 | head -n -2 | awk '{print $1}' | xargs -I{} screen -S {} -X quit"
+
+#--- git
+alias gs="git status "
+alias ga="git add "
+alias gl="git log "
+alias gc="git commit -m "
+alias gd="git diff "
+alias gdt="git difftool "
+#alias gr="git rm \$(git ls-files --deleted) " # note: has to add \ before $ for this kind of alias
+
+
+#--- gnome
+alias go="gnome-open "
+
+#--- sedi
+alias sedi="sed -f .sed -i "
+
+#--- touch
+alias t="touch "
+
+export PATH=$PATH:$HOME/local/bin
+
+alias ta="tmux attach -t "
+alias tl="tmux ls"
+alias tn="tmux new -s "
+alias findme="find . -maxdepth 1 -user swa "
+
+# 2016 alias 
+alias ty='tail -f /var/log/messages'
+alias p='ps aux | grep -i'
+#alias m='mysql -p'
+alias d='du -sh'
+#alias tcga="ssh -i ~/keys/tcga.key c182209@ec2-54-242-128-61.compute-1.amazonaws.com"
+alias r="readlink -f"
+
+# docker 
+alias drun='docker run --rm  '
+alias dps='docker ps -a '
+alias drm='docker rm '
+alias dstart='docker start '
+alias dstop='docker stop '
+
+alias cluster='ssh swa@192.168.1.80'
+#}}}
+ 
