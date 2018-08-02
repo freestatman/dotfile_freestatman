@@ -637,8 +637,35 @@ less()
 
 alias cluster='ssh swa@192.168.1.80'
 
+<<<<<<< HEAD
 
 diff_dev_prd()
 {
     find -maxdepth 1 -name \*R | xi diff [] $1/[]
 }
+=======
+# restart the network
+# sudo service network-manager restart
+
+# docker {{{
+alias dps='sudo docker ps'
+alias dimg='sudo docker images'
+alias dpsa='sudo docker ps -a'
+alias drm='sudo docker rm '
+alias dstop='sudo docker stop '
+alias drmall='sudo docker ps -a -q | xi docker rm []'
+alias dstopall='sudo docker ps -q | xi docker stop []'
+alias dup='sudo docker-compose up'
+
+#}}}
+
+# nginx {{{
+alias ngt='sudo nginx -t'
+alias ngrestart='sudo systemctl restart nginx'
+alias ngstart='sudo systemctl start nginx'
+alias ngstop='sudo nginx -s stop'
+alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
+alias ngconfd='cd /etc/nginx/conf.d; ls'
+
+#}}}
+>>>>>>> 357c7b360d5be432839014692f1eadc20f0f706c

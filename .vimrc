@@ -18,11 +18,11 @@
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
-    set mouse=a         " Enable mouse usage (all modes)
-    set ttymouse=xterm2
+    set mouse=a        " Enable mouse usage (all modes)
+    "set ttymouse=xterm2
     set cindent
-    set cursorline      " show the highlight of the current line
-    set ruler           " show the cursor position all the time
+    set cursorline        " show the highlight of the current line
+    set ruler        " show the cursor position all the time
 
     set nocompatible
     syntax enable
@@ -34,16 +34,17 @@
     endif
 
     " The following are commented out as they cause vim to behave a lot
-    set showcmd       " Show (partial) command in status line.
-    set showmatch     " Show matching brackets.
-    set ignorecase    " Do case insensitive matching
-    set smartcase     " Do smart case matching
-    set incsearch     " Incremental search
-    set autowrite     " Automatically save before command like :next and :make
+    set showcmd        " Show (partial) command in status line.
+    set showmatch        " Show matching brackets.
+    set ignorecase        " Do case insensitive matching
+    set smartcase        " Do smart case matching
+    set incsearch        " Incremental search
+    set autowrite        " Automatically save before command like :next and :make
     set hlsearch
 
-    set showtabline=2 " always tabs visible
-    " set mouse=a Enable mouse usage (all modes)
+    set showtabline=2  " always tabs visible
+    " set mouse=a        " Enable mouse usage (all modes)
+
     set foldmethod=marker
 
     set autoread
@@ -63,9 +64,14 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
 
 "snippet related plugins
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-rmarkdown'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
@@ -86,7 +92,7 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-surround'
-"Plugin 'valloric/youcompleteme'
+" Plugin 'valloric/youcompleteme'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-syntastic/syntastic'
 "Plugin 'jaxbot/browserlink.vim'
@@ -167,16 +173,6 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 "" grep i/o files in R script
 :noremap <C-i> :!~/grep_io_files.sh % <CR><CR>:vsp ~/tmp_io_file.R<CR><C-w>R<ESC>
 
-"----------------------------------------------------------------------------
-" Screen.vim
-nmap <F9> V:ScreenSend<CR>j
-vmap <F9> :ScreenSend<CR>j
-" HPC
-" map <F10> :ScreenShellVertical<CR>oqlogin<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
-" Linux PC
-map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
-let g:ScreenImpl = 'Tmux'
-
 
 autocmd FileType sh nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 autocmd FileType sh nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
@@ -192,13 +188,14 @@ autocmd FileType r,R  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z ."
 autocmd FileType r,R  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
 
 " awesome updated version of \h
+"nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
 "nmap <Leader>h "zyiw :call ScreenShellSend("as_data_frame(".@z .")")<CR>
 "nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
 "nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
 "nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
 "nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
 "nmap <Leader>H "zyiw :call ScreenShellSend( "write.table(head(".@z .", 3), file=file.path('~/tmpo.txt'), row.names=T, sep='\\t', quote=FALSE)" )<CR> :read ~/tmpo.txt<CR>V3j<C-c><CR>
-"autocmd FileType R,r  nmap <Leader>H "zyiw :call ScreenShellSend( "write.table(head(".@z .", 3), file=file.path('~/tmpo.txt'), row.names=T, sep='\\t', quote=FALSE)" )<CR> :read ~/tmpo.txt<CR>V3j<C-c><CR>
+autocmd FileType R,r  nmap <Leader>H "zyiw :call ScreenShellSend( "write.table(head(".@z .", 3), file=file.path('~/tmpo.txt'), row.names=T, sep='\\t', quote=FALSE)" )<CR> :read ~/tmpo.txt<CR>V3j<C-c><CR>
 
 "nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .", 2)")<CR>
 "nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .", 2)")<CR>
@@ -243,7 +240,7 @@ set cmdheight=2
 set display=uhex
 set completeopt=menu
 set noexpandtab
-set history=10000
+set history=1000
 "set list listchars=trail:-,extends:>,precedes:<
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set laststatus=2
@@ -337,12 +334,8 @@ nmap <leader>al= :Align= <CR>
 :nmap qa :qa<CR>
 :imap jj <ESC>
 :nmap vv vi{=<CR>
-:vmap vv "*y
+:vmap vv "+y
 
-command WQ wq
-command Wq wq
-command W w
-command Q q
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs
@@ -355,6 +348,14 @@ nmap <C-j> :tabnext<CR>
 nmap <C-k> :tabprevious<CR>
 nmap <C-n> :tabnew   
 noremap <F7> :set expandtab!<CR>
+
+"----------------------------------------------------------------------------
+" Screen.vim
+nmap <F9> V:ScreenSend<CR>j
+vmap <F9> :ScreenSend<CR>j
+" map <F10> :ScreenShellVertical<CR>oqA<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
+map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
+let g:ScreenImpl = 'Tmux'
 
 
 " NERDTree
@@ -410,7 +411,7 @@ let vimrplugin_assign = 0
 " lintr via syntastic plugin
 "----------------------------------------------------------------------------
 let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_r_checkers = ['lintr']
+" let g:syntastic_r_checkers = ['lintr']
 
 "}}}
 
@@ -469,9 +470,3 @@ let g:multi_cursor_quit_key='<Esc>'
 "}}}
 
 
-" python settings {{{
-" http://liuchengxu.org/posts/use-vim-as-a-python-ide/
-autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
-autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
-hi pythonSelf  ctermfg=68  guifg=#5f87d7 cterm=bold gui=bold
-"}}}
