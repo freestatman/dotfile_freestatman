@@ -23,6 +23,10 @@ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic
 sudo apt update
 sudo apt install -y r-base
 
+# R/tidyverse dependency 
+sudo apt install -y libxml2-dev
+sudo apt install -y libcurl4-openssl-dev libssl-dev
+
 sudo Rscript install.R
 
 
