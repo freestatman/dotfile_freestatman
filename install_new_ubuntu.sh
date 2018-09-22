@@ -8,26 +8,49 @@ sudo apt-get install -y vim
 sudo apt-get install -y tmux
 sudo apt-get install -y git
 sudo apt-get install -y fish
+
+#--------------------------------------------------------
+# Python
+#--------------------------------------------------------
 #sudo apt-get install -y python
 #sudo apt-get install -y python3-pip
 
-#sudo apt-get install -y r-base
-#sudo su - -c "R -e \"install.packages(c('shiny', 'ticyverse'), repos='https://cran.rstudio.com/')\""
+#--------------------------------------------------------
+# R and packages
+#--------------------------------------------------------
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+sudo apt update
+sudo apt install -y r-base
 
+sudo Rscript install.R
+
+
+#--------------------------------------------------------
 # Shiny/Rstudio servers
+#--------------------------------------------------------
+sudo apt-get install -y gdebi-core
+wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
+sudo gdebi rstudio-server-1.1.456-amd64.deb
+
+wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.9.923-amd64.deb
+sudo gdebi shiny-server-1.5.9.923-amd64.deb
+
+sudo rstudio-server verify-installation
+sudo rstudio-server start
+
 #sudo apt-get install -y gdebi-core
 #wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.5.6.875-amd64.deb
 #sudo gdebi shiny-server-1.5.6.875-amd64.deb
 #wget https://download2.rstudio.org/rstudio-server-1.1.383-amd64.deb
 #sudo gdebi rstudio-server-1.1.383-amd64.deb
-#sudo rstudio-server verify-installation
-#sudo rstudio-server start
 
 sudo apt-get install -y default-jre
 java -version
 
 #--------------------------------------------------------
 # install docker
+#--------------------------------------------------------
 sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -42,7 +65,6 @@ sudo apt-get install -y docker-ce
 sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
-
 
 
 # for install neovim in unbuntu
