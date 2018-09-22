@@ -10,10 +10,16 @@ sudo apt-get install -y git
 sudo apt-get install -y fish
 
 #--------------------------------------------------------
-# Python
+# Python, pip, and aws cli
 #--------------------------------------------------------
-#sudo apt-get install -y python
-#sudo apt-get install -y python3-pip
+sudo apt-get install -y python-pip
+sudo apt-get install -y python3-pip
+sudo apt-get install -y awscli
+pip3 install awscli --upgrade --user
+aws --version
+
+#aws configure
+#aws s3 ls
 
 #--------------------------------------------------------
 # R and packages
