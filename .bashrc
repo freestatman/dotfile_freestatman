@@ -591,7 +591,7 @@ if [ -f '/home/freeman/gCloud/google-cloud-sdk/completion.bash.inc' ]; then sour
 # environment setup (keep this bottom)  {{{
 export EDITOR="vim"
 set -o vi
-tmux
+# tmux
 #}}}
 
 # render rmarkdown file {{{

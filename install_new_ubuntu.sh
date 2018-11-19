@@ -76,6 +76,15 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+#----------------------------------------------------------------------------
+# add docker user group
+#----------------------------------------------------------------------------
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+docker ps
+
+
 
 # for install neovim in unbuntu
 # sudo apt-get install -y software-properties-common
