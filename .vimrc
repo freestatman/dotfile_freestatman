@@ -72,6 +72,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-rmarkdown'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'jalvesaq/Nvim-R'
+"Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
@@ -102,6 +103,18 @@ Plugin 'tmhedberg/SimpylFold'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " }}}
+"
+" Nvim-R config
+"let r_indent_op_pattern = '\(+\|-\|\*\|/\|=\|\~\|%\)$'
+"let g:r_indent_op_pattern = '%[^%]*%$'
+"
+let R_assign=3
+set expandtab
+set shiftwidth=4
+let r_indent_ess_comments = 1
+let g:r_indent_align_args = 3
+let g:r_indent_comment_column = '##'
+
 
 
 " Color and font {{{
@@ -351,11 +364,15 @@ noremap <F7> :set expandtab!<CR>
 
 "----------------------------------------------------------------------------
 " Screen.vim
-nmap <F9> V:ScreenSend<CR>j
-vmap <F9> :ScreenSend<CR>j
-" map <F10> :ScreenShellVertical<CR>oqA<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
-map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
+"nmap <F9> V:ScreenSend<CR>j
+"vmap <F9> :ScreenSend<CR>j
+"map <F10> :ScreenShellVertical<CR>oqA<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
+"map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
 let g:ScreenImpl = 'Tmux'
+
+" use nVim-R macros
+map <F9> <leader>lj
+map <F10> <leader>rf
 
 
 " NERDTree

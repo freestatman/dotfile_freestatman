@@ -591,7 +591,7 @@ if [ -f '/home/freeman/gCloud/google-cloud-sdk/completion.bash.inc' ]; then sour
 # environment setup (keep this bottom)  {{{
 export EDITOR="vim"
 set -o vi
-tmux
+# tmux
 #}}}
 
 # render rmarkdown file {{{
@@ -642,6 +642,24 @@ diff_dev_prd()
 {
     find -maxdepth 1 -name \*R | xi diff [] $1/[]
 }
+
+## cp code from dev to val
+dev2val()
+{
+    devfile=$1
+    valfile=${devfile/DEV/VAL}
+
+    if [ ! -f $valfile ]; then
+        cp $devfile $valfile
+        sed -i 's/\bDEV\b/VAL/g' $valfile
+        chmod 555 $valfile
+        echo "vimdiff $valfile $devfile"
+    else
+        echo "$valfile exisits"
+    fi
+
+}
+
 
 # restart the network
 # sudo service network-manager restart
