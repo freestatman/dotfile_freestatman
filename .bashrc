@@ -637,13 +637,12 @@ less()
 
 alias cluster='ssh swa@192.168.1.80'
 
-<<<<<<< HEAD
 
 diff_dev_prd()
 {
     find -maxdepth 1 -name \*R | xi diff [] $1/[]
 }
-=======
+
 # restart the network
 # sudo service network-manager restart
 
@@ -668,4 +667,3 @@ alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
 alias ngconfd='cd /etc/nginx/conf.d; ls'
 
 #}}}
->>>>>>> 357c7b360d5be432839014692f1eadc20f0f706c
