@@ -122,3 +122,7 @@ ln -f .config/fish/config.fish ~/.config/fish/config.fish
 #sudo apt update
 #sudo apt install i3 #sudo apt-get install arandr # GUI for setting moniter resolution
 
+
+git config --global user.email "shuaichengwang@gmail.com"
+git config --global user.name "Freeman Wang"
+
