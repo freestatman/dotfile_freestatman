@@ -77,8 +77,6 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-
-"Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'chrisbra/Colorizer'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/screen'
@@ -86,7 +84,6 @@ Plugin 'ervandew/screen'
 "Plugin 'junegunn/vim-easy-align'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'pangloss/vim-javascript'
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
 "Plugin 'tomtom/tlib_vim'
 "Plugin 'tpope/vim-commentary'
@@ -179,9 +176,9 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 
 
 " IDE tools {{{
-:noremap <leader>sh  :!sh %:r.sh <CR>
-":noremap <leader>log :!vsp -O LOGS_AND_LISTS/%*log <CR>
-":noremap <leader>er  :!vim -O LOGS_AND_LISTS/%*er <CR>
+" :noremap <leader>sh  :!sh %:r.sh <CR>
+" :noremap <leader>log :!vsp -O LOGS_AND_LISTS/%*log <CR>
+" :noremap <leader>er  :!vim -O LOGS_AND_LISTS/%*er <CR>
 
 "" grep i/o files in R script
 :noremap <C-i> :!~/grep_io_files.sh % <CR><CR>:vsp ~/tmp_io_file.R<CR><C-w>R<ESC>
@@ -192,30 +189,13 @@ autocmd FileType sh nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR
 "nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 "nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
 
-autocmd FileType r,R  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-autocmd FileType r,R  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
-
-" awesome updated version of \h
-"nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
-"nmap <Leader>h "zyiw :call ScreenShellSend("as_data_frame(".@z .")")<CR>
-"nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
-"nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-"nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
-"nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-"nmap <Leader>H "zyiw :call ScreenShellSend( "write.table(head(".@z .", 3), file=file.path('~/tmpo.txt'), row.names=T, sep='\\t', quote=FALSE)" )<CR> :read ~/tmpo.txt<CR>V3j<C-c><CR>
-autocmd FileType R,r  nmap <Leader>H "zyiw :call ScreenShellSend( "write.table(head(".@z .", 3), file=file.path('~/tmpo.txt'), row.names=T, sep='\\t', quote=FALSE)" )<CR> :read ~/tmpo.txt<CR>V3j<C-c><CR>
-
-"nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .", 2)")<CR>
-"nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .", 2)")<CR>
-"nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-"nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-"nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
-"}}}
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
+autocmd FileType r,R,rmd,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
 
 
 " tags {{{
@@ -364,15 +344,16 @@ noremap <F7> :set expandtab!<CR>
 
 "----------------------------------------------------------------------------
 " Screen.vim
-"nmap <F9> V:ScreenSend<CR>j
-"vmap <F9> :ScreenSend<CR>j
+nmap <F9> V:ScreenSend<CR>j
+vmap <F9> :ScreenSend<CR>j
 "map <F10> :ScreenShellVertical<CR>oqA<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
-"map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
+"#map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
+map <F10> :ScreenShellVertical<CR>
 let g:ScreenImpl = 'Tmux'
 
 " use nVim-R macros
-map <F9> <leader>lj
-map <F10> <leader>rf
+autocmd FileType R,r,Rmd,rmd map <F9> <leader>lj
+autocmd FileType R,r,Rmd,rmd map <F10> <leader>rf
 
 
 " NERDTree
