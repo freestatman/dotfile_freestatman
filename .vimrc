@@ -51,6 +51,10 @@ set autoread
 
 " }}}
 
+" remap F1 to Esc
+:nmap <F1> <nop>
+map <F1> <Esc>
+imap <F1> <Esc>
 
 " Vunde {{{
 " set the runtime path to include Vundle and initialize
@@ -111,7 +115,6 @@ set shiftwidth=4
 let r_indent_ess_comments = 1
 let g:r_indent_align_args = 3
 let g:r_indent_comment_column = '##'
-
 
 
 " Color and font {{{
@@ -509,5 +512,6 @@ map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
 
 
 "}}}
+
 
 

@@ -111,11 +111,12 @@ cd ~/github/
 git clone https://github.com/wangtulao/dotfile_swa
 
 cd dotfile_swa
-ln -f .vimrc ~/
-ln -f .bashrc ~/
-ln -f .tmux.conf ~/
+ln -fs $PWD/.vimrc ~/
+ln -fs $PWD/.bashrc ~/
+ln -fs $PWD/.tmux.conf ~/
 mkdir -p ~/.config/fish/
-ln -f .config/fish/config.fish ~/.config/fish/config.fish
+ln -f $PWD/.config/fish/config.fish ~/.config/fish/config.fish
+ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/bundle/vim-snippets/snippets/
 
 # install i3 window manager
 # after the installation, log out and log back in
