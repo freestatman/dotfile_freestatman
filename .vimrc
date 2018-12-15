@@ -7,47 +7,47 @@
 " 	                                                                              
 " System Setting -----------------------{{{
 
+syntax on
+:set pastetoggle=<f5>
+set guifont=Monaco:h12
+
+" set smartindent
+" set autoindent
+" set showtabline=2  " always tabs visible
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set mouse=a        " Enable mouse usage (all modes)
+"set ttymouse=xterm2
+set cindent
+set cursorline        " show the highlight of the current line
+set ruler        " show the cursor position all the time
+
+set nocompatible
+syntax enable
+filetype plugin on
+filetype indent on
+
+if has("syntax")
     syntax on
-    :set pastetoggle=<f5>
-    set guifont=Monaco:h12
+endif
 
-    " set smartindent
-    " set autoindent
-    " set showtabline=2  " always tabs visible
-    set expandtab
-    set tabstop=4
-    set shiftwidth=4
-    set softtabstop=4
-    set mouse=a        " Enable mouse usage (all modes)
-    "set ttymouse=xterm2
-    set cindent
-    set cursorline        " show the highlight of the current line
-    set ruler        " show the cursor position all the time
+" The following are commented out as they cause vim to behave a lot
+set showcmd        " Show (partial) command in status line.
+set showmatch        " Show matching brackets.
+set ignorecase        " Do case insensitive matching
+set smartcase        " Do smart case matching
+set incsearch        " Incremental search
+set autowrite        " Automatically save before command like :next and :make
+set hlsearch
 
-    set nocompatible
-    syntax enable
-    filetype plugin on
-    filetype indent on
+set showtabline=2  " always tabs visible
+" set mouse=a        " Enable mouse usage (all modes)
 
-    if has("syntax")
-     syntax on
-    endif
+set foldmethod=marker
 
-    " The following are commented out as they cause vim to behave a lot
-    set showcmd        " Show (partial) command in status line.
-    set showmatch        " Show matching brackets.
-    set ignorecase        " Do case insensitive matching
-    set smartcase        " Do smart case matching
-    set incsearch        " Incremental search
-    set autowrite        " Automatically save before command like :next and :make
-    set hlsearch
-
-    set showtabline=2  " always tabs visible
-    " set mouse=a        " Enable mouse usage (all modes)
-
-    set foldmethod=marker
-
-    set autoread
+set autoread
 
 " }}}
 
@@ -136,12 +136,12 @@ set background=dark
 
 
 " Commenting blocks of code. {{{
-autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-autocmd FileType sh,ruby,python,R let b:comment_leader = '# '
-autocmd FileType conf,fstab       let b:comment_leader = '# '
-autocmd FileType tex              let b:comment_leader = '% '
-autocmd FileType mail             let b:comment_leader = '> '
-autocmd FileType vim              let b:comment_leader = '" '
+autocmd FileType c,cpp,java,scala   let b:comment_leader = '// '
+autocmd FileType sh,ruby,python,R,r let b:comment_leader = "# "
+autocmd FileType conf,fstab         let b:comment_leader = "# "
+autocmd FileType tex                let b:comment_leader = '% '
+autocmd FileType mail               let b:comment_leader = '> '
+autocmd FileType vim                let b:comment_leader = '" '
 noremap <silent> <C-c> :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR> :nohlsearch<CR>
 noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR> :nohlsearch<CR>
 
@@ -181,21 +181,13 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 " :noremap <leader>er  :!vim -O LOGS_AND_LISTS/%*er <CR>
 
 "" grep i/o files in R script
-:noremap <C-i> :!~/grep_io_files.sh % <CR><CR>:vsp ~/tmp_io_file.R<CR><C-w>R<ESC>
+" :noremap <C-i> :!~/grep_io_files.sh % <CR><CR>:vsp ~/tmp_io_file.R<CR><C-w>R<ESC>
 
 
 autocmd FileType sh nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 autocmd FileType sh nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
 "nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 "nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
-
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-autocmd FileType r,R,rmd,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
 
 
 " tags {{{
@@ -288,11 +280,11 @@ nmap qe yiwPa=<ESC>ww
 
 let mapleader='\'
 if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 "let g:Powerline_symbols = 'fancy'
 "call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
@@ -419,14 +411,14 @@ let g:syntastic_enable_r_lintr_checker = 1
 map cc b~el
 
 function! TwiddleCase(str)
-	if a:str ==# toupper(a:str)
-		let result = tolower(a:str)
-	elseif a:str ==# tolower(a:str)
-		let result = substitute(a:str,'(\<\w\+\>\)', '\u\1', 'g')
-	else
-		let result = toupper(a:str)
-	endif
-	return result
+    if a:str ==# toupper(a:str)
+        let result = tolower(a:str)
+    elseif a:str ==# tolower(a:str)
+        let result = substitute(a:str,'(\<\w\+\>\)', '\u\1', 'g')
+    else
+        let result = toupper(a:str)
+    endif
+    return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv)
 
@@ -464,6 +456,57 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+"}}}
+
+
+"Nvim-R tricks{{{
+"
+
+autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+
+autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
+
+
+" Use Ctrl+Space to do omnicompletion:
+if has('nvim') || has('gui_running')
+    inoremap <C-Space> <C-x><C-o>
+else
+    inoremap <Nul> <C-x><C-o>
+endif
+
+" Press the space bar to send lines and selection to R:
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+
+
+" The plugin also contains a function called RAction which allows you to build
+" ad-hoc commands to R. This function takes the name of an R function such as
+" "levels" or "table" and the word under the cursor, and passes them to R as a
+" command.
+
+nmap <silent> <LocalLeader>h :call RAction("head", "@,48-57,_,.")<CR>
+vmap <silent> <LocalLeader>h :call RAction("head", "v")<CR>
+nmap <silent> <LocalLeader>g :call RAction("glimpse")<CR>
+nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
+nmap <silent> <LocalLeader>n :call RAction("names")<CR>
+nmap <silent> <LocalLeader>l :call RAction("length")<CR>
+nmap <silent> <LocalLeader>d :call RAction("dim")<CR>
+nmap <silent> <LocalLeader>lv :call RAction("levels")<CR>
+"nmap <silent> <LocalLeader>H :call RAction("head")<CR>
+
+map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
+
+" The era prior to Nvim-R
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
+
 
 "}}}
 
