@@ -110,7 +110,7 @@ cd ~/github/
 
 git clone https://github.com/wangtulao/dotfile_swa
 
-cd dotfile_swa
+cd ~/github/dotfile_swa
 ln -fs $PWD/.vimrc ~/
 ln -fs $PWD/.bashrc ~/
 ln -fs $PWD/.tmux.conf ~/
