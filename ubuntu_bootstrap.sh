@@ -85,7 +85,15 @@ sudo usermod -aG docker $USER
 docker ps
 
 
+#-----------------------------------------------------------
+# virtualbox utils
+#-----------------------------------------------------------
+sudo apt-get install virtualbox-guest-utils
+sudo apt install cifs-utils
+mkdir -p ~/share
+sudo mount -t vboxsf www ~/share
 
+#-----------------------------------------------------------
 # for install neovim in unbuntu
 # sudo apt-get install -y software-properties-common
 # sudo add-apt-repository ppa:neovim-ppa/stable
