@@ -74,6 +74,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-rmarkdown'
+Plugin 'vim-scripts/Align'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'jalvesaq/Nvim-R'
 "Plugin 'jcfaria/Vim-R-plugin'
@@ -99,6 +100,21 @@ Plugin 'tpope/vim-surround'
 "Plugin 'vim-syntastic/syntastic'
 "Plugin 'jaxbot/browserlink.vim'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'ncm2/ncm2'
+Plugin 'roxma/nvim-yarp'
+Plugin 'gaalcaras/ncm-R'
+
+" Vim 8 only
+if !has('nvim')
+    Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
+" Optional: for snippet support
+" Further configuration might be required, read below
+" Plugin 'sirver/UltiSnips'
+" Plugin 'ncm2/ncm2-ultisnips'
 
 
 " All of your Plugins must be added before the following line
