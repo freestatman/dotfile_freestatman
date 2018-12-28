@@ -130,8 +130,10 @@ set expandtab
 set shiftwidth=4
 let r_indent_ess_comments = 1
 let g:r_indent_align_args = 3
-let g:r_indent_comment_column = '##'
+let g:r_indent_comment_column = '#'
 
+" https://github.com/gvfarns/r_indent_gvf
+:autocmd FileType r setlocal indentexpr=RIndent_GVF(v:lnum)
 
 " Color and font {{{
 

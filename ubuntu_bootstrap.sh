@@ -126,6 +126,15 @@ mkdir -p ~/.config/fish/
 ln -f $PWD/.config/fish/config.fish ~/.config/fish/config.fish
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/bundle/vim-snippets/snippets/
 
+## Alternative / preferred R-indent for vim
+## https://github.com/gvfarns/r_indent_gvf
+## To use add the following to your .vimrc
+## :autocmd FileType r setlocal indentexpr=RIndent_GVF(v:lnum)
+## and put r.vim in your .vim/indent directory.
+md ~/.vim/indent
+
+wget https://raw.githubusercontent.com/gvfarns/r_indent_gvf/f80d5948543ed94c8b43f2b884dd4a8e2f19a853/r.vim -O ~/.vim/indent/r.vim
+
 # install i3 window manager
 # after the installation, log out and log back in
 #sudo apt update
