@@ -516,8 +516,7 @@ nmap <silent> <LocalLeader>l :call RAction("length")<CR>
 nmap <silent> <LocalLeader>d :call RAction("dim")<CR>
 nmap <silent> <LocalLeader>lv :call RAction("levels")<CR>
 "nmap <silent> <LocalLeader>H :call RAction("head")<CR>
-
-map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
+"map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
 
 " The era prior to Nvim-R
 " autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
