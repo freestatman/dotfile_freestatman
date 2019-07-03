@@ -685,3 +685,10 @@ alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
 alias ngconfd='cd /etc/nginx/conf.d; ls'
 
 #}}}
+
+
+if [ -f ~/.git-prompt.bash ]; then
+    source ~/.git-prompt.bash
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[22;36m\]\u@\[\033[22;36m\]\h:\[\033[01;34m\]\w\[\033[01;32m\]\$ '
+    export PS1='\w\033[22;32m$(__git_ps1 "(%s)")\033[22;34m\e[m>'
+fi
