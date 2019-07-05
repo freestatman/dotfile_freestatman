@@ -125,6 +125,8 @@ ln -fs $PWD/.tmux.conf ~/
 mkdir -p ~/.config/fish/
 ln -f $PWD/.config/fish/config.fish ~/.config/fish/config.fish
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/bundle/vim-snippets/snippets/
+ln -fs $PWD/.git-completion.bash ~/
+ln -fs $PWD/.git-prompt.bash ~/
 
 ## Alternative / preferred R-indent for vim
 ## https://github.com/gvfarns/r_indent_gvf
