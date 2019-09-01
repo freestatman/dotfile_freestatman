@@ -18,6 +18,12 @@ sudo apt-get install -y awscli
 pip3 install awscli --upgrade --user
 aws --version
 
+## powerline installation 
+pip install powerline-status
+sudo apt-get install fonts-powerline
+source /home/pi/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+PATH=$PATH:~/.local/bin
+
 #aws configure
 #aws s3 ls
 

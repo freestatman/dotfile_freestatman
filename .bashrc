@@ -344,7 +344,7 @@ alias sedi="sed -f .sed -i "
 #--- touch
 alias t="touch "
 
-export PATH=$PATH:$HOME/local/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/local/bin
 
 alias ta="tmux attach -t "
 alias tl="tmux ls"
@@ -367,6 +367,7 @@ function log()
     bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')    
     vim -O `ls ./LOGS_AND_LISTS/$bsnm*log` `ls ./LOGS_AND_LISTS/$bsnm*Rout`; 
 }
+
 function er() 
 { 
     bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')    
@@ -608,13 +609,10 @@ export HISTSIZE=100000
 export HISTFILESIZE=2000
 #}}}
 
-# docker {{{
-alias drun='docker run --rm  '
-alias dps='docker ps -a '
-alias drm='docker rm '
-alias dstart='docker start '
-alias dstop='docker stop '
+# powerline {{{
+source /home/pi/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #}}}
+
 
 
 # automatically ls after cd
@@ -661,18 +659,15 @@ dev2val()
 }
 
 
-# restart the network
-# sudo service network-manager restart
-
 # docker {{{
-alias dps='sudo docker ps'
-alias dimg='sudo docker images'
-alias dpsa='sudo docker ps -a'
-alias drm='sudo docker rm '
-alias dstop='sudo docker stop '
-alias drmall='sudo docker ps -a -q | xi docker rm []'
-alias dstopall='sudo docker ps -q | xi docker stop []'
-alias dup='sudo docker-compose up'
+alias dps='docker ps'
+alias dimg='docker images'
+alias dpsa='docker ps -a'
+alias drm='docker rm '
+alias dstop='docker stop '
+alias drmall='docker ps -a -q | xi docker rm []'
+alias dstopall='docker ps -q | xi docker stop []'
+alias dup='docker-compose up'
 
 #}}}
 
