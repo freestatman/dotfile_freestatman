@@ -8,7 +8,7 @@
 " System Setting -----------------------{{{
 
 syntax on
-:set pastetoggle=<f5>
+:set pastetoggle=<F5>
 set guifont=Monaco:h12
 
 " set smartindent
@@ -18,7 +18,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set mouse=a        " Enable mouse usage (all modes)
+"set mouse=a        " Enable mouse usage (all modes)
 "set ttymouse=xterm2
 set cindent
 set cursorline        " show the highlight of the current line
@@ -62,7 +62,9 @@ imap <F1> <Esc>
 call plug#begin('~/.vim/plugged')
 
 "snippet related plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} 
+" Plug 'neoclide/coc.nvim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
@@ -100,7 +102,7 @@ Plug 'gaalcaras/ncm-R'
 
 " Vim 8 only
 if !has('nvim')
-    Plugin 'roxma/vim-hug-neovim-rpc'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " Optional: for snippet support
@@ -351,15 +353,21 @@ noremap <F7> :set expandtab!<CR>
 
 "----------------------------------------------------------------------------
 " Screen.vim
-nmap <F9> V:ScreenSend<CR>j
-vmap <F9> :ScreenSend<CR>j
+autocmd FileType sh,txt nmap <Space> V:ScreenSend<CR>j
+autocmd FileType sh,txt vmap <Space> :ScreenSend<CR>j
+
+"nmap <F9> V:ScreenSend<CR>j
+"vmap <Space> :ScreenSend<CR>j
 "map <F10> :ScreenShellVertical<CR>oqA<Esc>V:ScreenSend<CR>VsR<Esc>V:ScreenSend<CR>dd
-"#map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
+"map <F10> :ScreenShellVertical<CR>VsR<Esc>V:ScreenSend<CR>dd
 map <F10> :ScreenShellVertical<CR>
 let g:ScreenImpl = 'Tmux'
 
 " use nVim-R macros
-autocmd FileType R,r,Rmd,rmd map <F9> <leader>lj
+" Press the space bar to send lines and selection to R:
+" autocmd FileType R,r,Rmd,rmd vmap <Space> <Plug>RDSendSelection
+" autocmd FileType R,r,Rmd,rmd nmap <Space> <Plug>RDSendLine
+autocmd FileType R,r,Rmd,rmd map <Space> <leader>lj
 autocmd FileType R,r,Rmd,rmd map <F10> <leader>rf
 
 
@@ -491,9 +499,6 @@ else
     inoremap <Nul> <C-x><C-o>
 endif
 
-" Press the space bar to send lines and selection to R:
-vmap <Space> <Plug>RDSendSelection
-nmap <Space> <Plug>RDSendLine
 
 
 " The plugin also contains a function called RAction which allows you to build

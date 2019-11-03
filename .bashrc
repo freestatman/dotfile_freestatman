@@ -6,6 +6,13 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+
+# Use vim with syntax highlighting for read only viewing
+alias vi='/home/swa/github/vim/src/vim'   # vim 8.1
+alias vim='/home/swa/github/vim/src/vim'  # vim 8.1
+alias v='vim -u ~/.vimrc.more '
+alias vv='vim -u ~/.vimrc.more - '
+
 export HISTIGNORE=' *:ls:lt:pwd:clear:cd:q:b:h:fg:e:ll:tp:td:tr:sl:R:qA:qB:qstat:w:who:..:screen'
 
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -97,9 +104,9 @@ alias tree='tree -Csu'          # nice alternative to 'ls'
 alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
 alias fishrc='vim ~/.config/fish/config.fish'
-alias last='vim `ls -t|head -n1`'
-alias last2='vim -O `ls -t|head -n2`'
-alias last3='vim -p `ls -t|head -n3`'
+#alias last='vim `ls -t|head -n1`'
+#alias last2='vim -O `ls -t|head -n2`'
+#alias last3='vim -p `ls -t|head -n3`'
 alias cl='cat `ls -t|head -n1`'
 alias cl2='cat `ls -t|head -n2`'
 alias hl='head -v `ls -t|head -n1`'
@@ -199,7 +206,7 @@ function a()
         #export FILENAME=`echo $1 | awk -F '.' '{print $1}'`
         #export SUFF=`echo $1 | awk -F '.' '{print $NF}'`
         #cp $1 archived/${FILENAME}_swa_`date +%m%d%y`.$SUFF
-        cp $1 archived/$1_swa_`date +%m%d%y_%s`
+        cp $1 archived/$1_${USER}_`date +%m%d%y_%s`
     else
         echo "$1 not found."
     fi
@@ -610,7 +617,7 @@ export HISTFILESIZE=2000
 #}}}
 
 # powerline {{{
-source ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #}}}
 
 
@@ -687,3 +694,23 @@ if [ -f ~/.git-prompt.bash ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[22;36m\]\u@\[\033[22;36m\]\h:\[\033[01;34m\]\w\[\033[01;32m\]\$ '
     export PS1='\w\033[22;32m$(__git_ps1 "(%s)")\033[22;34m\e[m>'
 fi
+
+
+# fmt r code {{{
+
+fmtrcode ()
+{
+    R -e "styler::style_file(path=\"$1\", strict = FALSE, indent = 4)"
+}
+
+
+fmtrdir ()
+{
+    R -e 'styler::style_dir(strict = FALSE, indent = 4, recursive = FALSE)'
+}
+
+
+#}}}
+
+
+
