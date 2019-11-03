@@ -51,60 +51,52 @@ set autoread
 
 " }}}
 
-" remap F1 to Esc
+"remap F1 to Esc for weird keyboard layout
 :nmap <F1> <nop>
 map <F1> <Esc>
 imap <F1> <Esc>
 
-" Vunde {{{
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Bundle 'altercation/vim-colors-solarized'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 "snippet related plugins
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'vim-pandoc/vim-rmarkdown'
-Plugin 'vim-scripts/Align'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'jalvesaq/Nvim-R'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
+Plug 'vim-scripts/Align'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'jalvesaq/Nvim-R'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'chrisbra/Colorizer'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/screen'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'tmhedberg/SimpylFold'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'gaalcaras/ncm-R'
+
 "Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'chrisbra/Colorizer'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ervandew/screen'
 "Plugin 'git://git.wincent.com/command-t.git'
 "Plugin 'junegunn/vim-easy-align'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/nerdtree'
 "Plugin 'tomtom/tlib_vim'
 "Plugin 'tpope/vim-commentary'
 "Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-surround'
-" Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-syntastic/syntastic'
 "Plugin 'jaxbot/browserlink.vim'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'ncm2/ncm2'
-Plugin 'roxma/nvim-yarp'
-Plugin 'gaalcaras/ncm-R'
 
 " Vim 8 only
 if !has('nvim')
@@ -118,9 +110,11 @@ endif
 
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 " }}}
-"
+
+
+
 " Nvim-R config
 "let r_indent_op_pattern = '\(+\|-\|\*\|/\|=\|\~\|%\)$'
 "let g:r_indent_op_pattern = '%[^%]*%$'

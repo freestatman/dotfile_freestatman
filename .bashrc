@@ -610,7 +610,7 @@ export HISTFILESIZE=2000
 #}}}
 
 # powerline {{{
-source /home/pi/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+source ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 #}}}
 
 

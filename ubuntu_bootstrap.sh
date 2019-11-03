@@ -8,6 +8,8 @@ sudo apt-get install -y vim
 sudo apt-get install -y tmux
 sudo apt-get install -y git
 sudo apt-get install -y fish
+sudo apt-get install -y zsh
+sudo apt-get install -y curl
 
 #--------------------------------------------------------
 # Python, pip, and aws cli
@@ -117,12 +119,17 @@ sudo mount -t vboxsf www ~/share
 # vim and dotfiles
 #-----------------------------------------------------------
 # install vim Vundle, then you need to :BundleInstall
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# switch from Vundle to Plug
+# download & install plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 mkdir -p ~/github/
 cd ~/github/
 
-git clone https://github.com/wangtulao/dotfile_swa
+git clone https://github.com/freestatman/dotfile_swa
 
 cd ~/github/dotfile_swa
 ln -fs $PWD/.vimrc ~/
