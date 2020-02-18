@@ -1,6 +1,6 @@
 
 cd ~/github/dotfile_swa
-pwd
+mkdir -p ~/.config/fish/
 
 ln -f .vimrc ~/
 ln -f .bashrc ~/

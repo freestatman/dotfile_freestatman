@@ -8,8 +8,8 @@ fi
 
 
 # Use vim with syntax highlighting for read only viewing
-alias vi='/home/swa/github/vim/src/vim'   # vim 8.1
-alias vim='/home/swa/github/vim/src/vim'  # vim 8.1
+#alias vi='/home/swa/github/vim/src/vim'   # vim 8.1
+#alias vim='/home/swa/github/vim/src/vim'  # vim 8.1
 alias v='vim -u ~/.vimrc.more '
 alias vv='vim -u ~/.vimrc.more - '
 
@@ -310,16 +310,10 @@ extract () {
 # more alias, e.g. path, git, tmux, screen, {{{
 
 #---- Cluster ----
-alias qA="qsub -I -q A -l nodes=owl15"
-alias qB="qsub -I -q B"
-alias qexpress="qsub -I -q express"
 alias e='exit'
 alias q='qstat | grep swa'
 alias qs='qstat -s'
 alias qn='qstat -n'
-
-# 1000G DATA
-alias 1kg="cd /home/bssi/RandD/PUBLIC_DATABASE/1000GENOMES/1000G_phase3_v5_20130502"
 
 #----- Rscript ----
 alias r="/usr/local/bin/Rscript --verbose"
@@ -617,7 +611,7 @@ export HISTFILESIZE=2000
 #}}}
 
 # powerline {{{
-source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+# source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #}}}
 
 
@@ -639,8 +633,6 @@ less()
     fi
 }
 
-
-alias cluster='ssh swa@192.168.1.80'
 
 
 diff_dev_prd()
