@@ -8,8 +8,7 @@ fi
 
 
 # Use vim with syntax highlighting for read only viewing
-#alias vi='/home/swa/github/vim/src/vim'   # vim 8.1
-#alias vim='/home/swa/github/vim/src/vim'  # vim 8.1
+alias vi='vim'   # vim 8.1
 alias v='vim -u ~/.vimrc.more '
 alias vv='vim -u ~/.vimrc.more - '
 
