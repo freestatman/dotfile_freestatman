@@ -316,8 +316,6 @@ alias qs='qstat -s'
 alias qn='qstat -n'
 
 #----- Rscript ----
-alias r="/usr/local/bin/Rscript --verbose"
-alias r1="R CMD BATCH "
 
 #----- Screen -----
 alias sr="screen -r "
