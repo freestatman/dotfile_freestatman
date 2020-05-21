@@ -47,9 +47,10 @@ sudo Rscript install.R
 #--------------------------------------------------------
 # Shiny/Rstudio servers
 #--------------------------------------------------------
-sudo apt-get install -y gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
-sudo gdebi rstudio-server-1.1.456-amd64.deb
+
+sudo apt-get install gdebi-core
+wget https://download2.rstudio.org/server/trusty/amd64/rstudio-server-1.2.5042-amd64.deb
+sudo gdebi rstudio-server-1.2.5042-amd64.deb
 
 wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.9.923-amd64.deb
 sudo gdebi shiny-server-1.5.9.923-amd64.deb
@@ -146,7 +147,7 @@ ln -fs $PWD/.git-prompt.bash ~/
 ## To use add the following to your .vimrc
 ## :autocmd FileType r setlocal indentexpr=RIndent_GVF(v:lnum)
 ## and put r.vim in your .vim/indent directory.
-md ~/.vim/indent
+mkdir -p ~/.vim/indent
 
 wget https://raw.githubusercontent.com/gvfarns/r_indent_gvf/f80d5948543ed94c8b43f2b884dd4a8e2f19a853/r.vim -O ~/.vim/indent/r.vim
 
