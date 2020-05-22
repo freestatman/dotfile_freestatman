@@ -9,7 +9,7 @@ alias mkdir='mkdir -p'
 alias h='history'
 alias j='jobs -l'
 # The 'ls' family (this assumes you use the GNU ls)
-alias ll="ls -alF --color=auto"
+alias ll='ls -alF --color=auto'
 alias la='ls -Al'               # show hidden files
 alias ls='ls -ahF --color=auto' # add colors for filetype recognition
 alias lx='ls -lXB'              # sort by extension
@@ -48,29 +48,35 @@ alias dstart='docker start '
 alias dstop='docker stop '
 
 #--- git
-alias gs="git status "
-alias ga="git add "
-alias gl="git log "
-alias gc="git commit -m "
-alias gd="git diff "
-alias gdt="git difftool "
-#alias gr="git rm \$(git ls-files --deleted) " # note: has to add \ before $ for this kind of alias
+alias gs='git status '
+alias ga='git add '
+alias gl='git log '
+alias gc='git commit -m '
+alias gd='git diff '
+alias gdt='git difftool '
 
 #--- gnome
-alias go="gnome-open "
+alias go='gnome-open '
 
 #--- sedi
-alias sedi="sed -f .sed -i "
+alias sedi='sed -f .sed -i '
 
 #--- touch
-alias t="touch "
+alias t='touch '
 
-export PATH=$PATH:$HOME/local/bin
+#--- tmux
+alias ta='tmux attach -t '
+alias tl='tmux ls'
+alias tn='tmux new -s '
+alias findme='find . -maxdepth 1 -user swa '
 
-alias ta="tmux attach -t "
-alias tl="tmux ls"
-alias tn="tmux new -s "
-alias findme="find . -maxdepth 1 -user swa "
+## notes-cli
+## wget https://github.com/prdpx7/notes-cli/releases/download/v0.1/notes ~/.local/bin/notes
+## chmod +x ~/.local/bin/notes
+source ~/.secret
+alias nr='notes read'
+alias nw='notes write'
+alias ns='notes sync'
 
 # function
 function f

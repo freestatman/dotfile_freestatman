@@ -702,4 +702,18 @@ fmtrdir ()
 #}}}
 
 
+## notes-cli
+## wget https://github.com/prdpx7/notes-cli/releases/download/v0.1/notes ~/.local/bin/notes
+## chmod +x ~/.local/bin/notes
+source ~/.secret
+alias nr='notes read'
+alias nw='notes write'
+alias ns='notes sync'
+
+
+## jump to fish as default
+if [ -f /etc/fish/config.fish ]; then
+    fish
+fi
+
 
