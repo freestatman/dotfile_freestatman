@@ -14,11 +14,6 @@ alias vv='vim -u ~/.vimrc.more - '
 
 export HISTIGNORE=' *:ls:lt:pwd:clear:cd:q:b:h:fg:e:ll:tp:td:tr:sl:R:qA:qB:qstat:w:who:..:screen'
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
@@ -55,14 +50,14 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-    xterm*|rxvt*)
-        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-        ;;
-    *)
-        ;;
-esac
+# # If this is an xterm set the title to user@host:dir
+# case "$TERM" in
+#     xterm*|rxvt*)
+#         PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#         ;;
+#     *)
+#         ;;
+# esac
 
 #}}}
 
@@ -349,7 +344,7 @@ alias tl="tmux ls"
 alias tn="tmux new -s "
 alias findme="find . -maxdepth 1 -user swa "
 
-# 2016 alias 
+# 2016 alias
 alias ty='tail -f /var/log/messages'
 alias p='ps aux | grep -i'
 #alias m='mysql -p'
@@ -361,15 +356,15 @@ alias r="readlink -f"
 
 # functions to check log/er/out files {{{
 function log()
-{ 
-    bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')    
-    vim -O `ls ./LOGS_AND_LISTS/$bsnm*log` `ls ./LOGS_AND_LISTS/$bsnm*Rout`; 
+{
+    bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')
+    vim -O `ls ./LOGS_AND_LISTS/$bsnm*log` `ls ./LOGS_AND_LISTS/$bsnm*Rout`;
 }
 
-function er() 
-{ 
-    bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')    
-    vim -O `ls ./LOGS_AND_LISTS/$bsnm*er`; 
+function er()
+{
+    bsnm=$(printf '%s\n' "$1" | sed -r '$s/\.(pl|R|r|sh)$//I')
+    vim -O `ls ./LOGS_AND_LISTS/$bsnm*er`;
 }
 
 # }}}
@@ -398,7 +393,7 @@ function mdqa()
 
 #----------------------------------------------------------------------------
 function sy
-{ 
+{
     if [ -f .conf ] ; then
         source .conf #--- set from/to path
         for f in `find $from -maxdepth 1 -not -type d -and -not -name ".*" -printf "%f\n"`; do
@@ -423,7 +418,7 @@ function sy
 
 
 function ss()
-{ 
+{
     if [ -f .conf ] ; then
         source .conf #--- set from/to path
         if [ -f $to/$1 ]; then

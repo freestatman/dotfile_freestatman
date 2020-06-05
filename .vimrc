@@ -38,7 +38,6 @@ set laststatus=2
 set nobackup
 set nocompatible
 set noerrorbells
-set nohlsearch
 set noshowmatch
 set noswapfile
 set nowrap
@@ -484,7 +483,6 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-
 
 
 
