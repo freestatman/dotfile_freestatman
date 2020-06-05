@@ -1,5 +1,4 @@
-
-fish_vi_key_bindings 
+fish_vi_key_bindings
 
 alias e='exit'
 alias rm='rm -i'
@@ -41,7 +40,7 @@ alias xi='xargs -I []'
 
 alias b='cd -'
 
-# docker 
+# docker
 alias drun='docker run --rm  '
 alias dps='docker ps -a '
 alias drm='docker rm '
