@@ -1,6 +1,7 @@
 
 fish_vi_key_bindings 
 
+alias e='exit'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i' # Prevents accidentally clobbering files.
