@@ -138,6 +138,7 @@ ln -fs $PWD/.bashrc ~/
 ln -fs $PWD/.tmux.conf ~/
 ln -fs $PWD/.aliases ~/
 mkdir -p ~/.config/fish/
+mkdir -p ~/.vim/undodir/
 ln -f $PWD/.config/fish/config.fish ~/.config/fish/config.fish
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/plugged/vim-snippets/snippets/
 ln -fs $PWD/.git-completion.bash ~/

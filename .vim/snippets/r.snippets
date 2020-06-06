@@ -3,7 +3,6 @@ snippet #!
 
 # includes
 snippet lib
-	#---- libs
 	library(data.table)
 	library(tidyverse)
 	library(glue)
@@ -11,10 +10,9 @@ snippet lib
 	library(janitor)
 	options(tibble.width = Inf)
 	theme_set(theme_bw())
-	
+
 
 snippet path
-	#---- path
 	options(error=recover)
 	baspath <- '$1'
 	statues <- '${3:dev}'
@@ -37,7 +35,7 @@ snippet on.exit
 # regular functions
 snippet head
 	head(${1:obj})${2}
-snippet dim 
+snippet dim
 	dim(${1:obj})${2}
 snippet paste0
 	paste0(${1:obj})${2}
@@ -45,7 +43,7 @@ snippet unique
 	unique(${1:obj})${2}
 snippet length
 	length(${1:obj})${2}
-snippet	union 
+snippet	union
 	union(${1:obj}, ${2:obj}) ${3}
 snippet	intersect
 	intersect(${1:obj}, ${2:obj}) ${3}
@@ -105,7 +103,7 @@ snippet ei
 		${2}
 	}${3}
 
-snippet for 
+snippet for
 	for (${1:x} in ${2:c()}) {
 		${3:do}
 	}
@@ -125,9 +123,9 @@ snippet write.t
 	write.table(${1}, file=file.path(${2}), row.names=FALSE, sep='\t', quote=FALSE)
 snippet write.c
 	write.csv(${1}, file=file.path(${2}), row.names=FALSE)
-snippet load 
+snippet load
 	(load(file=file.path(${1}), envir=${2}.GlobalEnv))
-snippet scan 
+snippet scan
 	scan(file=file.path(${1}), what=character())
 snippet save
 	save(${1}, file=file.path(${2}))
@@ -151,7 +149,7 @@ snippet strsplit
 	strsplit(${1}, split='${2}')${3}
 snippet table
 	table(${1}, useNA='ifany')${3}
-snippet with 
+snippet with
 	with(${1:df}, ${2:sth})${3}
 
 # comment
@@ -160,7 +158,7 @@ snippet cl
 
 snippet cb
 	#-----------------------------------------------------------------------------
-	#---- ${1} 
+	#---- ${1}
 	#-----------------------------------------------------------------------------
 
 snippet cbb
@@ -260,7 +258,7 @@ snippet	left
 	left_join(${1:condition}) ${2:%>%}
 snippet	group_by
 	group_by(${1:condition}) ${2:%>%}
-snippet	filter 
+snippet	filter
 	dplyr::filter(${1:condition}) ${2:%>%}
 snippet	select
 	dplyr::select(${1:vars}) ${2:%>%}
