@@ -15,6 +15,7 @@ if has("syntax")
     syntax on
 endif
 
+"set ruler                  " show the cursor position all the time
 retab
 set autoread
 set autowrite              " Automatically save before command like :next and :make
@@ -28,7 +29,6 @@ set display=uhex
 set expandtab
 set ffs=unix
 set foldmethod=marker
-set guicursor=
 set guifont=Monaco:h12
 set hidden
 set history=1000
@@ -44,7 +44,6 @@ set nowrap
 set nu
 set pastetoggle=<F5>
 set relativenumber
-set ruler                  " show the cursor position all the time
 set scrolloff=8
 set shiftwidth=4
 set showcmd                " Show (partial) command in status line.
@@ -60,22 +59,37 @@ set undodir=~/.vim/undodir
 set undofile
 set wildmenu
 
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=3 guibg=DarkCyan " :h guibg;  :h ctermbg
+highlight lCursor  ctermbg=3 guifg=DarkCyan    " not working yet
+
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\e[5 q"
+    let &t_SR = "\e[6 q"
+    let &t_EI = "\e[2 q"
+endif
+
+" not working yet
+set guicursor+=i:blinkwait10
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkwait700-blinkon400-blinkoff250
 
 " }}}
 
 
 " etc {{{
-
 " disable arrow keys
-"no <down> ddp
-"no <up> ddkP
-no <left> <Nop>
-no <right> <Nop>
 ino <down> <Nop>
 ino <left> <Nop>
 ino <right> <Nop>
 ino <up> <Nop>
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
+no <up> <Nop>
 vno <down> <Nop>
 vno <left> <Nop>
 vno <right> <Nop>
@@ -105,14 +119,6 @@ nmap <leader>w" ciw"<C-r>""<ESC>
 
 "quick equal: transform 'word' ==> 'word=word'
 nmap <leader>qe yiwPa=<ESC>ww
-
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
 
 " set spell
@@ -188,11 +194,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " register
 nmap rr :reg<cr>
 
-
-" lintr via syntastic plugin
-let g:syntastic_enable_r_lintr_checker = 0
-let g:syntastic_r_checkers = ['lintr']
-
 "remap F1 to Esc for weird keyboard layout
 nmap <F1> <nop>
 map <F1> <Esc>
@@ -207,6 +208,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dense-analysis/ale'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'ervandew/screen'
 Plug 'gaalcaras/ncm-R'
@@ -234,6 +236,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-scripts/Align'
 Plug 'vim-utils/vim-man'
+Plug 'vim-syntastic/syntastic'
 
 "Plugin 'jcfaria/Vim-R-plugin'
 "Plugin 'junegunn/vim-easy-align'
@@ -256,15 +259,12 @@ call plug#end()
 " Nvim-R config
 let r_syntax_folding = 1
 let R_assign=3
-let g:r_indent_align_args = 3
+let g:r_indent_align_args = 1  " :h ft-r-indent
 let g:r_indent_comment_column = '#'
 let g:syntastic_r_checkers = 1
 let r_indent_ess_comments = 1
-let r_indent_op_pattern = '(+\|-\|\*\|/\|=\|\~\|%\)$'
+let r_indent_op_pattern = '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\)\s*$' "'(+\|-\|\*\|/\|=\|\~\|%\)$'
 let vimrplugin_assign = 0
-
-" https://github.com/gvfarns/r_indent_gvf
-:autocmd FileType r setlocal indentexpr=RIndent_GVF(v:lnum)
 
 
 " Commenting blocks of code. {{{
@@ -441,34 +441,29 @@ let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
+nnoremap <Leader>pf :Files<CR>
+nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>u :UndotreeShow<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 
-
 " GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
 nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>rr <Plug>(coc-rename)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
 nnoremap <leader>cr :CocRestart
 
 
@@ -485,5 +480,17 @@ endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
 
+
+" lintr via syntastic plugin
+let g:syntastic_enable_r_lintr_checker = 0
+let g:syntastic_r_checkers = ['styler']
+let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
+
+let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'javascript': ['eslint'],
+            \   'R': ['styler'],
+            \   'r': ['styler'],
+            \}
 
 
