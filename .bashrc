@@ -1,18 +1,160 @@
 
-#  prompt {{{
+#  aliases {{{
+
+source ~/.aliases
+
+#
+# # path, git, tmux, screen
+# #---- Cluster ----
+# alias e='exit'
+# alias q='qstat | grep swa'
+# alias qs='qstat -s'
+# alias qn='qstat -n'
+#
+# #----- Screen -----
+# alias sr="screen -r "
+# alias ss="screen -S "
+# alias sl="screen -ls "
+# alias sx="screen -x "
+# alias cleanscreen="screen -ls | tail -n +2 | head -n -2 | awk '{print $1}' | xargs -I{} screen -S {} -X quit"
+#
+# #--- git
+# alias gs="git status "
+# alias ga="git add "
+# alias gl="git log "
+# alias gc="git commit -m "
+# alias gd="git diff "
+# alias gdt="git difftool "
+# alias gr="git rm \$(git ls-files --deleted) " # note: has to add \ before $ for this kind of alias
+#
+# #--- gnome
+# alias go="gnome-open "
+#
+# #--- sedi
+# alias sedi="sed -f .sed -i "
+#
+# #--- touch
+# alias t="touch "
+#
+# #--- tmux
+# alias ta="tmux attach -t "
+# alias tl="tmux ls"
+# alias tn="tmux new -s "
+# alias findme="find . -maxdepth 1 -user swa "
+#
+# # 2016 alias
+# alias ty='tail -f /var/log/messages'
+# alias p='ps aux | grep -i'
+# #alias m='mysql -p'
+# alias d='du -sh'
+# #alias tcga="ssh -i ~/keys/tcga.key c182209@ec2-54-242-128-61.compute-1.amazonaws.com"
+# alias r="readlink -f"
+#
+# ## notes-cli
+# ## wget https://github.com/prdpx7/notes-cli/releases/download/v0.1/notes ~/.local/bin/notes
+# ## chmod +x ~/.local/bin/notes
+# source ~/.secret
+# #alias nr='notes read'
+# #alias nw='notes write'
+# #alias ns='notes sync'
+#
+# # docker {{{
+# alias dps='docker ps'
+# alias dimg='docker images'
+# alias dpsa='docker ps -a'
+# alias drm='docker rm '
+# alias dstop='docker stop '
+# alias drmall='docker ps -a -q | xi docker rm []'
+# alias dstopall='docker ps -q | xi docker stop []'
+# alias dup='docker-compose up'
+#
+# #}}}
+#
+# # nginx {{{
+# alias ngt='sudo nginx -t'
+# alias ngrestart='sudo systemctl restart nginx'
+# alias ngstart='sudo systemctl start nginx'
+# alias ngstop='sudo nginx -s stop'
+# alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
+# alias ngconfd='cd /etc/nginx/conf.d; ls'
+#
+# #}}}
+#
+# # etc alias {{{
+#
+# # enable color support of ls and also add handy aliases
+# if [ -x /usr/bin/dircolors ]; then
+# test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+# alias grep='grep --color=auto'
+# alias fgrep='fgrep --color=auto'
+# alias egrep='egrep --color=auto'
+# fi
+#
+# #-------------------
+# # Personnal Aliases
+# #-------------------
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i' # Prevents accidentally clobbering files.
+# alias c='clear; ls -hF --color=auto'
+# alias mkdir='mkdir -p'
+# alias h='history'
+# alias j='jobs -l'
+# # The 'ls' family (this assumes you use the GNU ls)
+# alias ll="ls -alF --color=auto"
+# alias la='ls -Al'               # show hidden files
+# alias ls='ls -ahF --color=auto' # add colors for filetype recognition
+# alias lx='ls -lXB'              # sort by extension
+# alias lk='ls -lSr'              # sort by size
+# alias lc='ls -lcr'              # sort by change time
+# alias lu='ls -lur'              # sort by access time
+# alias lt='ls -altr'             # sort by date
+# alias ltt='ls -altr | tail'     # sort by date
+# alias l='ls -altr'              # sort by date
+# alias lm='ls -al |more'         # pipe through 'more'
+# alias tree='tree -Csu'          # nice alternative to 'ls'
+#
+# alias vimrc='vim ~/.vimrc'
+# alias bashrc='vim ~/.bashrc'
+# alias fishrc='vim ~/.config/fish/config.fish'
+# #alias last='vim `ls -t|head -n1`'
+# #alias last2='vim -O `ls -t|head -n2`'
+# #alias last3='vim -p `ls -t|head -n3`'
+# alias cl='cat `ls -t|head -n1`'
+# alias cl2='cat `ls -t|head -n2`'
+# alias hl='head -v `ls -t|head -n1`'
+# alias hl2='head -v `ls -t|head -n2`'
+# #alias tl='tail -v `ls -t|head -n1`'
+# #alias tl2='tail -v `ls -t|head -n2`'
+# alias wl='wc -l'
+# #alias top='top -h'
+# alias xi='xargs -I []'
+#
+# alias b='cd -'
+# alias ..='cd ..'
+# alias ...='cd ../..'
+# alias ....='cd ../../..'
+# alias .4='cd ../../..'
+# alias .5='cd ../../../..'
+#
+# #}}}
+#
+# # }}}
+
+
+#  prompt and enviroment variabls {{{
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-
-# Use vim with syntax highlighting for read only viewing
-alias vi='vim'   # vim 8.1
-alias v='vim -u ~/.vimrc.more '
-alias vv='vim -u ~/.vimrc.more - '
-
+export EDITOR="vim"
+export HISTFILESIZE=2000
 export HISTIGNORE=' *:ls:lt:pwd:clear:cd:q:b:h:fg:e:ll:tp:td:tr:sl:R:qA:qB:qstat:w:who:..:screen'
+export HISTSIZE=100000
+export PATH=$PATH:$HOME/.local/bin:$HOME/local/bin
+set -o vi
 
 force_color_prompt=yes
 
@@ -61,64 +203,6 @@ unset color_prompt force_color_prompt
 
 #}}}
 
-# alias {{{
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-fi
-
-#-------------------
-# Personnal Aliases
-#-------------------
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i' # Prevents accidentally clobbering files.
-alias c='clear; ls -hF --color=auto'
-alias mkdir='mkdir -p'
-alias h='history'
-alias j='jobs -l'
-# The 'ls' family (this assumes you use the GNU ls)
-alias ll="ls -alF --color=auto"
-alias la='ls -Al'               # show hidden files
-alias ls='ls -ahF --color=auto' # add colors for filetype recognition
-alias lx='ls -lXB'              # sort by extension
-alias lk='ls -lSr'              # sort by size
-alias lc='ls -lcr'              # sort by change time
-alias lu='ls -lur'              # sort by access time
-alias lt='ls -altr'             # sort by date
-alias ltt='ls -altr | tail'     # sort by date
-alias l='ls -altr'              # sort by date
-alias lm='ls -al |more'         # pipe through 'more'
-alias tree='tree -Csu'          # nice alternative to 'ls'
-
-alias vimrc='vim ~/.vimrc'
-alias bashrc='vim ~/.bashrc'
-alias fishrc='vim ~/.config/fish/config.fish'
-#alias last='vim `ls -t|head -n1`'
-#alias last2='vim -O `ls -t|head -n2`'
-#alias last3='vim -p `ls -t|head -n3`'
-alias cl='cat `ls -t|head -n1`'
-alias cl2='cat `ls -t|head -n2`'
-alias hl='head -v `ls -t|head -n1`'
-alias hl2='head -v `ls -t|head -n2`'
-#alias tl='tail -v `ls -t|head -n1`'
-#alias tl2='tail -v `ls -t|head -n2`'
-alias wl='wc -l'
-#alias top='top -h'
-alias xi='xargs -I []'
-
-alias b='cd -'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .4='cd ../../..'
-alias .5='cd ../../../..'
-
-#}}}
 
 # File & strings related functions: {{{
 function gg()
@@ -178,6 +262,7 @@ function lowercase()  # move filenames to lowercase
 
 #}}}
 
+
 # archive function {{{
 function a1()
 {
@@ -207,6 +292,7 @@ function a()
 }
 
 # }}}
+
 
 # qa function {{{
 function qa()
@@ -264,6 +350,7 @@ function qa1()
 
 #}}}
 
+
 # Compression shortcuts {{{
 #tar.gz
 tg() {
@@ -301,58 +388,6 @@ extract () {
 
 #}}}
 
-# more alias, e.g. path, git, tmux, screen, {{{
-
-#---- Cluster ----
-alias e='exit'
-alias q='qstat | grep swa'
-alias qs='qstat -s'
-alias qn='qstat -n'
-
-#----- Rscript ----
-
-#----- Screen -----
-alias sr="screen -r "
-alias ss="screen -S "
-alias sl="screen -ls "
-alias sx="screen -x "
-alias cleanscreen="screen -ls | tail -n +2 | head -n -2 | awk '{print $1}' | xargs -I{} screen -S {} -X quit"
-
-#--- git
-alias gs="git status "
-alias ga="git add "
-alias gl="git log "
-alias gc="git commit -m "
-alias gd="git diff "
-alias gdt="git difftool "
-alias gr="git rm \$(git ls-files --deleted) " # note: has to add \ before $ for this kind of alias
-
-
-#--- gnome
-alias go="gnome-open "
-
-#--- sedi
-alias sedi="sed -f .sed -i "
-
-#--- touch
-alias t="touch "
-
-export PATH=$PATH:$HOME/.local/bin:$HOME/local/bin
-
-alias ta="tmux attach -t "
-alias tl="tmux ls"
-alias tn="tmux new -s "
-alias findme="find . -maxdepth 1 -user swa "
-
-# 2016 alias
-alias ty='tail -f /var/log/messages'
-alias p='ps aux | grep -i'
-#alias m='mysql -p'
-alias d='du -sh'
-#alias tcga="ssh -i ~/keys/tcga.key c182209@ec2-54-242-128-61.compute-1.amazonaws.com"
-alias r="readlink -f"
-
-#}}}
 
 # functions to check log/er/out files {{{
 function log()
@@ -368,6 +403,7 @@ function er()
 }
 
 # }}}
+
 
 # utility shell functions {{{
 
@@ -496,6 +532,7 @@ function pwdw
 
 # }}}
 
+
 # subr series functions: 2016 bash functions {{{
 function subr
 {
@@ -539,6 +576,7 @@ function subs
 }
 # }}}
 
+
 # functions to init project structure {{{
 
 function init_prj
@@ -572,6 +610,7 @@ function init_prj
 
 #}}}
 
+
 # 2017 google cloud gcloud {{{
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -582,11 +621,6 @@ if [ -f '/home/freeman/gCloud/google-cloud-sdk/completion.bash.inc' ]; then sour
 
 # }}}
 
-# environment setup (keep this bottom)  {{{
-export EDITOR="vim"
-set -o vi
-# tmux
-#}}}
 
 # render rmarkdown file {{{
 function rmd
@@ -597,15 +631,10 @@ function rmd
 
 #}}}
 
-# history {{{
-export HISTSIZE=100000
-export HISTFILESIZE=2000
-#}}}
 
 # powerline {{{
 # source ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 #}}}
-
 
 
 # automatically ls after cd
@@ -626,11 +655,11 @@ less()
 }
 
 
-
 diff_dev_prd()
 {
     find -maxdepth 1 -name \*R | xi diff [] $1/[]
 }
+
 
 ## cp code from dev to val
 dev2val()
@@ -648,29 +677,6 @@ dev2val()
     fi
 
 }
-
-
-# docker {{{
-alias dps='docker ps'
-alias dimg='docker images'
-alias dpsa='docker ps -a'
-alias drm='docker rm '
-alias dstop='docker stop '
-alias drmall='docker ps -a -q | xi docker rm []'
-alias dstopall='docker ps -q | xi docker stop []'
-alias dup='docker-compose up'
-
-#}}}
-
-# nginx {{{
-alias ngt='sudo nginx -t'
-alias ngrestart='sudo systemctl restart nginx'
-alias ngstart='sudo systemctl start nginx'
-alias ngstop='sudo nginx -s stop'
-alias ngconf='sudo vim /etc/nginx/nginx.conf; cd /etc/nginx/'
-alias ngconfd='cd /etc/nginx/conf.d; ls'
-
-#}}}
 
 
 if [ -f ~/.git-prompt.bash ]; then
@@ -695,15 +701,6 @@ fmtrdir ()
 
 
 #}}}
-
-
-## notes-cli
-## wget https://github.com/prdpx7/notes-cli/releases/download/v0.1/notes ~/.local/bin/notes
-## chmod +x ~/.local/bin/notes
-source ~/.secret
-alias nr='notes read'
-alias nw='notes write'
-alias ns='notes sync'
 
 
 ## jump to fish as default

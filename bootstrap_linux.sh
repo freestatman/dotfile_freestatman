@@ -1,7 +1,7 @@
 
 sudo apt-get update
 sudo apt-get install -y openssh-server
-sudo service ssh status    
+sudo service ssh status
 sudo service ssh start
 sudo apt-get install -y pandoc
 sudo apt-get install -y vim
@@ -20,7 +20,7 @@ sudo apt-get install -y awscli
 pip3 install awscli --upgrade --user
 aws --version
 
-## powerline installation 
+## powerline installation
 pip install powerline-status
 sudo apt-get install fonts-powerline
 source /home/pi/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
@@ -37,7 +37,7 @@ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic
 sudo apt update
 sudo apt install -y r-base
 
-# R/tidyverse dependency 
+# R/tidyverse dependency
 sudo apt install -y libxml2-dev
 sudo apt install -y libcurl4-openssl-dev libssl-dev
 
@@ -136,27 +136,20 @@ cd ~/github/dotfile_swa
 ln -fs $PWD/.vimrc ~/
 ln -fs $PWD/.bashrc ~/
 ln -fs $PWD/.tmux.conf ~/
+ln -fs $PWD/.aliases ~/
 mkdir -p ~/.config/fish/
 ln -f $PWD/.config/fish/config.fish ~/.config/fish/config.fish
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/plugged/vim-snippets/snippets/
 ln -fs $PWD/.git-completion.bash ~/
 ln -fs $PWD/.git-prompt.bash ~/
 
-## Alternative / preferred R-indent for vim
-## https://github.com/gvfarns/r_indent_gvf
-## To use add the following to your .vimrc
-## :autocmd FileType r setlocal indentexpr=RIndent_GVF(v:lnum)
-## and put r.vim in your .vim/indent directory.
-mkdir -p ~/.vim/indent
-
-wget https://raw.githubusercontent.com/gvfarns/r_indent_gvf/f80d5948543ed94c8b43f2b884dd4a8e2f19a853/r.vim -O ~/.vim/indent/r.vim
 
 # install i3 window manager
 # after the installation, log out and log back in
 #sudo apt update
 #sudo apt install i3 #sudo apt-get install arandr # GUI for setting moniter resolution
 
-
 git config --global user.email "shuaichengwang@gmail.com"
 git config --global user.name "Freeman Wang"
+git config --global diff.tool "vimdiff3"
 
