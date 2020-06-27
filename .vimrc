@@ -221,6 +221,7 @@ Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
+Plug 'rhysd/vim-grammarous'
 Plug 'roxma/nvim-yarp'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -235,8 +236,8 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-scripts/Align'
-Plug 'vim-utils/vim-man'
 Plug 'vim-syntastic/syntastic'
+Plug 'vim-utils/vim-man'
 
 "Plugin 'jcfaria/Vim-R-plugin'
 "Plugin 'junegunn/vim-easy-align'
@@ -403,6 +404,21 @@ nmap <silent> <LocalLeader>d :call RAction("dim")<CR>
 nmap <silent> <LocalLeader>lv :call RAction("levels")<CR>
 "nmap <silent> <LocalLeader>H :call RAction("head")<CR>
 "map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
+
+" KnitrBootstrap
+function! RMakeBootstrapHTML()
+  update
+  call RSetWD()
+  let filename = expand("%")
+  let rcmd = "require('knitrBootstrap'); require('rmarkdown');
+           \  render(\"" . filename . "\", output_format=\"all\", clean=TRUE)"
+  if g:vimrplugin_openhtml
+    let rcmd = rcmd . ';'
+  endif
+  call g:SendCmdToR(rcmd)
+endfunction
+
+nnoremap <silent> <leader>kk :call RMakeBootstrapHTML()<CR>
 
 " The era prior to Nvim-R
 " autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
