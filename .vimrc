@@ -15,7 +15,8 @@ if has("syntax")
     syntax on
 endif
 
-"set ruler                  " show the cursor position all the time
+" set number relativenumber
+" set ruler                  " show the cursor position all the time
 retab
 set autoread
 set autowrite              " Automatically save before command like :next and :make
@@ -41,9 +42,7 @@ set noerrorbells
 set noshowmatch
 set noswapfile
 set nowrap
-set nu
 set pastetoggle=<F5>
-set relativenumber
 set scrolloff=8
 set shiftwidth=4
 set showcmd                " Show (partial) command in status line.
@@ -205,6 +204,17 @@ imap <F1> <Esc>
 " plugins {{{
 call plug#begin('~/.vim/plugged')
 
+" Plug 'scrooloose/nerdtree'
+" Plug 'jaxbot/browserlink.vim'
+" Plug 'jcfaria/Vim-R-plugin'
+" Plug 'junegunn/vim-easy-align'
+" Plug 'tpope/vim-commentary'
+" Plug 'valloric/youcompleteme'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'roxma/nvim-yarp'
+" Plug 'sheerun/vim-polyglot'
+
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -222,10 +232,7 @@ Plug 'mileszs/ack.vim'
 Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
 Plug 'rhysd/vim-grammarous'
-Plug 'roxma/nvim-yarp'
-"Plug 'scrooloose/nerdcommenter'
-"Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
@@ -239,14 +246,6 @@ Plug 'vim-scripts/Align'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-utils/vim-man'
 
-"Plugin 'jcfaria/Vim-R-plugin'
-"Plugin 'junegunn/vim-easy-align'
-"Plugin 'tpope/vim-commentary'
-"Plugin 'valloric/youcompleteme'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'jaxbot/browserlink.vim'
-
 " Vim 8 only
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
@@ -257,6 +256,7 @@ call plug#end()
 
 
 
+"Nvim-R tricks{{{
 " Nvim-R config
 let r_syntax_folding = 1
 let R_assign=3
@@ -266,6 +266,58 @@ let g:syntastic_r_checkers = 1
 let r_indent_ess_comments = 1
 let r_indent_op_pattern = '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\)\s*$' "'(+\|-\|\*\|/\|=\|\~\|%\)$'
 let vimrplugin_assign = 0
+
+"autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+"autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+"autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
+
+" Use Ctrl+Space to do omnicompletion:
+if has('nvim') || has('gui_running')
+    inoremap <C-Space> <C-x><C-o>
+else
+    inoremap <Nul> <C-x><C-o>
+endif
+
+" The plugin also contains a function called RAction which allows you to build
+" ad-hoc commands to R. This function takes the name of an R function such as
+" "levels" or "table" and the word under the cursor, and passes them to R as a
+" command.
+
+nmap <silent> <LocalLeader>h :call RAction("head", "@,48-57,_,.")<CR>
+vmap <silent> <LocalLeader>h :call RAction("head", "v")<CR>
+nmap <silent> <LocalLeader>g :call RAction("glimpse")<CR>
+nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
+nmap <silent> <LocalLeader>n :call RAction("names")<CR>
+nmap <silent> <LocalLeader>l :call RAction("length")<CR>
+nmap <silent> <LocalLeader>d :call RAction("dim")<CR>
+nmap <silent> <LocalLeader>lv :call RAction("levels")<CR>
+
+" KnitrBootstrap
+function! RMakeBootstrapHTML()
+  update
+  call RSetWD()
+  let filename = expand("%")
+  let rcmd = "require('knitrBootstrap'); require('rmarkdown');
+           \  render(\"" . filename . "\", output_format=\"all\", clean=TRUE)"
+  if g:vimrplugin_openhtml
+    let rcmd = rcmd . ';'
+  endif
+  call g:SendCmdToR(rcmd)
+endfunction
+
+nnoremap <silent> <leader>kk :call RMakeBootstrapHTML()<CR>
+
+" The era prior to Nvim-R
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
+" autocmd FileType r,R,rmd,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
+
+
+"}}}
 
 
 " Commenting blocks of code. {{{
@@ -303,11 +355,6 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 
 
 " IDE tools {{{
-" :noremap <leader>sh  :!sh %:r.sh <CR>
-" :noremap <leader>log :!vsp -O LOGS_AND_LISTS/%*log <CR>
-" :noremap <leader>er  :!vim -O LOGS_AND_LISTS/%*er <CR>
-"" grep i/o files in R script
-" :noremap <C-i> :!~/grep_io_files.sh % <CR><CR>:vsp ~/tmp_io_file.R<CR><C-w>R<ESC>
 
 autocmd FileType sh nmap <buffer> <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 autocmd FileType sh nmap <buffer> <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
@@ -316,13 +363,13 @@ autocmd FileType sh nmap <buffer> <Leader>l "zyiw :call ScreenShellSend("log ".@
 
 
 " tags {{{
-autocmd FileType r,rnoweb set tags+=~/.vim/RTAGS,~/.vim/RsrcTags
-function! StartUp()
-    if 0 == argc()
-        NERDTree
-    end
-endfunction
-autocmd VimEnter * call StartUp()
+" autocmd FileType r,rnoweb set tags+=~/.vim/RTAGS,~/.vim/RsrcTags
+" function! StartUp()
+"     if 0 == argc()
+"         NERDTree
+"     end
+" endfunction
+" autocmd VimEnter * call StartUp()
 "}}}
 
 
@@ -359,10 +406,6 @@ nnoremap Q <nop>
 map q <Nop>
 
 inoremap <c-f> <c-x><c-f>
-" Copy to osx clipboard (maynot work for Linux env)
-"  vnoremap <C-c> "*y<CR>
-"  vnoremap y "*y<CR>
-"  nnoremap Y "*Y<CR>
 
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
@@ -372,65 +415,6 @@ let g:multi_cursor_quit_key='<Esc>'
 "}}}
 
 
-"Nvim-R tricks{{{
-"
-
-autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
-autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
-autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
-
-
-" Use Ctrl+Space to do omnicompletion:
-if has('nvim') || has('gui_running')
-    inoremap <C-Space> <C-x><C-o>
-else
-    inoremap <Nul> <C-x><C-o>
-endif
-
-
-
-" The plugin also contains a function called RAction which allows you to build
-" ad-hoc commands to R. This function takes the name of an R function such as
-" "levels" or "table" and the word under the cursor, and passes them to R as a
-" command.
-
-nmap <silent> <LocalLeader>h :call RAction("head", "@,48-57,_,.")<CR>
-vmap <silent> <LocalLeader>h :call RAction("head", "v")<CR>
-nmap <silent> <LocalLeader>g :call RAction("glimpse")<CR>
-nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
-nmap <silent> <LocalLeader>n :call RAction("names")<CR>
-nmap <silent> <LocalLeader>l :call RAction("length")<CR>
-nmap <silent> <LocalLeader>d :call RAction("dim")<CR>
-nmap <silent> <LocalLeader>lv :call RAction("levels")<CR>
-"nmap <silent> <LocalLeader>H :call RAction("head")<CR>
-"map <silent> <LocalLeader>s :call g:SendCmdToR("search()")<CR>
-
-" KnitrBootstrap
-function! RMakeBootstrapHTML()
-  update
-  call RSetWD()
-  let filename = expand("%")
-  let rcmd = "require('knitrBootstrap'); require('rmarkdown');
-           \  render(\"" . filename . "\", output_format=\"all\", clean=TRUE)"
-  if g:vimrplugin_openhtml
-    let rcmd = rcmd . ';'
-  endif
-  call g:SendCmdToR(rcmd)
-endfunction
-
-nnoremap <silent> <leader>kk :call RMakeBootstrapHTML()<CR>
-
-" The era prior to Nvim-R
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>h "zyiw :call ScreenShellSend("head(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>g "zyiw :call ScreenShellSend("glimpse(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>r "zyiw :call ScreenShellSend("tbl_df(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>t "zyiw :call ScreenShellSend("tail(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>d "zyiw :call ScreenShellSend("dim(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>l "zyiw :call ScreenShellSend("length(".@z .")")<CR>
-" autocmd FileType r,R,rmd,Rmd  nmap <Leader>n "zyiw :call ScreenShellSend("names(".@z .")")<CR>
-
-
-"}}}
 
 
 
@@ -456,6 +440,7 @@ let g:netrw_browse_split = 2
 let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+let g:loaded_clipboard_provider = 1
 
 nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
@@ -498,38 +483,38 @@ autocmd BufWritePre * :call TrimWhitespace()
 
 
 " lintr via syntastic plugin
-let g:syntastic_enable_r_lintr_checker = 0
-let g:syntastic_r_checkers = ['styler']
-let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
-
-let g:ale_fixers = {
-            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \   'javascript': ['eslint'],
-            \   'R': ['styler'],
-            \   'r': ['styler'],
-            \}
-
-function! s:check_back_space() abort
-      let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+"  let g:syntastic_enable_r_lintr_checker = 0
+"  let g:syntastic_r_checkers = ['styler']
+"  let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
+"
+"  let g:ale_fixers = {
+"              \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"              \   'javascript': ['eslint'],
+"              \   'R': ['styler'],
+"              \   'r': ['styler'],
+"              \}
+"
+"  function! s:check_back_space() abort
+"        let col = col('.') - 1
+"          return !col || getline('.')[col - 1]  =~# '\s'
+"      endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"  nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -537,7 +522,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-
 
 
 " neovim mappings
