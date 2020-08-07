@@ -16,7 +16,9 @@ if has("syntax")
 endif
 
 " set number relativenumber
-" set ruler                  " show the cursor position all the time
+" set ruler                " show the cursor position all the time
+set termguicolors          " may not work with TMUX on some servers
+
 retab
 set autoread
 set autowrite              " Automatically save before command like :next and :make
@@ -53,7 +55,6 @@ set smartindent
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set t_Co=256
 set tabstop=4 shiftwidth=4 softtabstop=4
-set termguicolors
 set undodir=~/.vim/undodir
 set undofile
 set wildmenu
@@ -283,6 +284,8 @@ endif
 " "levels" or "table" and the word under the cursor, and passes them to R as a
 " command.
 
+autocmd FileType r,R,rmd,Rmd  nmap <LocalLeader>p "zyiw :call ScreenShellSend("install.packages(".@z .")"))<CR>
+nmap <LocalLeader>p "zyiw :call ScreenShellSend("install.packages(".@z .")"))<CR>
 nmap <silent> <LocalLeader>h :call RAction("head", "@,48-57,_,.")<CR>
 vmap <silent> <LocalLeader>h :call RAction("head", "v")<CR>
 nmap <silent> <LocalLeader>g :call RAction("glimpse")<CR>
@@ -416,8 +419,6 @@ let g:multi_cursor_quit_key='<Esc>'
 
 
 
-
-
 " R code specific {{{
 
 " Trying to write a vim function to format R codes
@@ -529,4 +530,11 @@ nmap <leader>f  <Plug>(coc-format-selected)
 nmap <space>e :CocCommand explorer<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+
+" fzf shortcuts
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+"remap F1 to nvim-R help (on cur) shortcut
+autocmd FileType R,r,Rmd,rmd map <silent> <F1> <Leader>rh
 
