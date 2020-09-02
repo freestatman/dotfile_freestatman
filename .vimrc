@@ -230,6 +230,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
 Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
 Plug 'rhysd/vim-grammarous'
@@ -255,6 +256,10 @@ endif
 call plug#end()
 " }}}
 
+
+" colorscheme
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 
 
 "Nvim-R tricks{{{
