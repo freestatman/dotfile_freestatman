@@ -4,7 +4,7 @@ source ~/.aliases
 #}}}
 
 
-#  prompt and enviroment variabls {{{
+#  prompt and environment variables {{{
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -526,7 +526,7 @@ dev2val()
         chmod 555 $valfile
         echo "vimdiff $valfile $devfile"
     else
-        echo "$valfile exisits"
+        echo "$valfile exists"
     fi
 
 }
