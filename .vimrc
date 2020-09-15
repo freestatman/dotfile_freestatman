@@ -122,8 +122,8 @@ nmap <leader>qe yiwPa=<ESC>ww
 
 
 " set spell
-nmap ss :set spell<CR>
-nmap sns :set nospell<CR>
+nmap ss :setlocal spell<CR>
+nmap sns :setlocal nospell<CR>
 
 
 " align code by equal sign
@@ -220,6 +220,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
+Plug 'dpelle/vim-LanguageTool'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'ervandew/screen'
 Plug 'gaalcaras/ncm-R'
@@ -434,6 +435,12 @@ let g:multi_cursor_quit_key='<Esc>'
 
 "}}}
 
+
+
+" coc-config
+"
+" hide nodejs lower version warning msg
+let g:coc_disable_startup_warning = 1
 
 if executable('rg')
     let g:rg_derive_root='true'
