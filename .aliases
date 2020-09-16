@@ -1,4 +1,11 @@
 # alias gr="git rm \$(git ls-files --deleted) " # note: only for bash, bash needs to add \ before $ for this kind of alias
+
+# use vim if nvim is not available in the system
+if command -v nvim &> /dev/null
+then
+    alias vim="nvim"
+fi
+
 alias ....="cd ../../.."
 alias ...="cd ../.."
 alias ..="cd .."
@@ -77,9 +84,8 @@ alias tl="tmux ls"
 alias tn="tmux new -s "
 alias tree="tree -Csu"          # nice alternative to ls
 alias ty="tail -f /var/log/messages"
-alias v="nvim -u ~/.vimrc.more "
-alias vi="nvim"
-alias vim="nvim"
+alias v="vim -u ~/.vimrc.more "
+alias vi="vim"
 alias vimrc="vim ~/.vimrc"
 alias vv="vim -u ~/.vimrc.more - "
 alias wl="wc -l"
