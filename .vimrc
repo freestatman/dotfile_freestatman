@@ -130,20 +130,20 @@ nmap sns :setlocal nospell<CR>
 nmap al :Align<- <CR>
 vmap vl :Align= <CR>
 
-
+nmap <leader>al# :Align# <CR>
 nmap <leader>al, :Align, <CR>
 nmap <leader>al; :Align; <CR>
 nmap <leader>al: :Align: <CR>
 nmap <leader>al= :Align= <CR>
 
 
-:ab #b #############################################################################
-:ab #l #----------------------------------------------------------------------------
-:nmap qq :q!<CR>
-:nmap qa :qa<CR>
-:imap jj <ESC>
-:nmap vv vi{=<CR>
-:vmap vv "+y
+ab #b #############################################################################
+ab #l #----------------------------------------------------------------------------
+nmap qq :q!<CR>
+nmap qa :qa<CR>
+imap jj <ESC>
+nmap vv vi{=<CR>
+vmap vv "+y
 
 
 " Tabs
@@ -357,9 +357,9 @@ noremap <silent> <C-x> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/'
 
 
 " Updating Peer reviewer  {{{
-:noremap <leader>cp  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" . "g/^#\\+\\s\\+Peer.*/s/Peer.*/Peer Reviewer\\/Date:\tTBD \\/ ".strftime("%b %d, %Y") <CR>
-:noremap <leader>ww  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" .  "g/^#\\+\\s\\+Programmer.*/s/Programmer.*/Programmer\\/Date:\tShuaicheng (Freeman) Wang \\/ ".strftime("%b %d, %Y")  <CR>
-:noremap <leader>nn  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" . "g/^#\\+\\s\\+Peer.*/s/hh/hh/" <CR>
+noremap <leader>cp  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" . "g/^#\\+\\s\\+Peer.*/s/Peer.*/Peer Reviewer\\/Date:\tTBD \\/ ".strftime("%b %d, %Y") <CR>
+noremap <leader>ww  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" .  "g/^#\\+\\s\\+Programmer.*/s/Programmer.*/Programmer\\/Date:\tShuaicheng (Freeman) Wang \\/ ".strftime("%b %d, %Y")  <CR>
+noremap <leader>nn  :autocmd bufnewfile,Bufwritepre *.r,*.R,*.sh exe "1," .  "$" . "g/^#\\+\\s\\+Peer.*/s/hh/hh/" <CR>
 "}}}
 
 
