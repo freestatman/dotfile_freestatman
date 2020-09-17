@@ -1,5 +1,13 @@
 
 #  aliases {{{
+
+# use vim if nvim is not available in the system
+# bash syntax
+if command -v nvim &> /dev/null
+then
+    alias vim="nvim"
+fi
+
 source ~/.aliases
 #}}}
 
@@ -556,7 +564,7 @@ fmtrdir ()
 #}}}
 
 
-## jump to fish as default, if installed
+## jump to fish as default, if installed in the system
 if [ -f /etc/fish/config.fish ]; then
     fish
 fi

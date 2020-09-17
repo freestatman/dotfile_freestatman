@@ -1,11 +1,5 @@
 # alias gr="git rm \$(git ls-files --deleted) " # note: only for bash, bash needs to add \ before $ for this kind of alias
 
-# use vim if nvim is not available in the system
-if command -v nvim &> /dev/null
-then
-    alias vim="nvim"
-fi
-
 alias ....="cd ../../.."
 alias ...="cd ../.."
 alias ..="cd .."

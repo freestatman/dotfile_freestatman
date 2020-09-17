@@ -1,6 +1,13 @@
 
 fish_vi_key_bindings
 
+# use vim if nvim is not available in the system
+# fish syntax
+if command -v nvim
+    echo nvim is used by default
+    alias vim="nvim"
+end
+
 source ~/.aliases
 
 # fish git prompt
