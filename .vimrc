@@ -258,9 +258,10 @@ call plug#end()
 " }}}
 
 
-" colorscheme
+" colorscheme - gruvbox {{{
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
+"}}}
 
 
 "Nvim-R tricks{{{
@@ -370,8 +371,6 @@ autocmd FileType sh nmap <buffer> <Leader>l "zyiw :call ScreenShellSend("log ".@
 "nmap <Leader>h "zyiw :call ScreenShellSend("echo $".@z ."")<CR>
 "nmap <Leader>l "zyiw :call ScreenShellSend("log ".@z ."")<CR>
 
-
-" tags {{{
 " autocmd FileType r,rnoweb set tags+=~/.vim/RTAGS,~/.vim/RsrcTags
 " function! StartUp()
 "     if 0 == argc()
@@ -382,9 +381,8 @@ autocmd FileType sh nmap <buffer> <Leader>l "zyiw :call ScreenShellSend("log ".@
 "}}}
 
 
-
 " Twiddle Case ----------------------------{{{
-" capitalized the first Letter
+" capitalized the first letter
 map cc b~el
 
 function! TwiddleCase(str)
@@ -424,8 +422,10 @@ let g:multi_cursor_quit_key='<Esc>'
 "}}}
 
 
-
 " R code specific {{{
+
+"remap F1 to nvim-R help (on cur) shortcut
+autocmd FileType R,r,Rmd,rmd map <silent> <F1> <Leader>rh
 
 " Trying to write a vim function to format R codes
 "function formatR(wmsg)
@@ -436,8 +436,7 @@ let g:multi_cursor_quit_key='<Esc>'
 "}}}
 
 
-
-" coc-config
+" coc-config {{{
 "
 " hide nodejs lower version warning msg
 let g:coc_disable_startup_warning = 1
@@ -543,10 +542,47 @@ nmap <space>e :CocCommand explorer<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
+"}}}
 
-" fzf shortcuts
+
+" fzf {{{
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+"}}}
 
-"remap F1 to nvim-R help (on cur) shortcut
-autocmd FileType R,r,Rmd,rmd map <silent> <F1> <Leader>rh
+
+" presentation mode {{{
+noremap <Left> :silent bp<CR> :redraw!<CR>
+noremap <Right> :silent bn<CR> :redraw!<CR>
+nmap <F9> :set relativenumber! number! showmode! showcmd! hidden! ruler!<CR>
+nmap <F2> :call DisplayPresentationBoundaries()<CR>
+
+let g:presentationBoundsDisplayed = 0
+function! DisplayPresentationBoundaries()
+    if g:presentationBoundsDisplayed
+        match
+        set colorcolumn=0
+        let g:presentationBoundsDisplayed = 0
+    else
+        highlight lastoflines ctermbg=darkred guibg=darkred
+        match lastoflines /\%23l/
+        set colorcolumn=80
+        let g:presentationBoundsDisplayed = 1
+    endif
+endfunction
+
+" toggles the paste mode
+nmap <C-p> :set paste!<CR>
+" toggles word wrap
+nmap <C-w> :set wrap! linebreak<CR>
+" opens the last buffer
+nnoremap <leader><leader> <C-^>
+" adds a line of <
+nmap <leader>a :normal 20i<<CR>
+" makes Ascii art font
+nmap <leader>f :.!toilet -w 200 -f small<CR>
+" makes Ascii border
+nmap <leader>1 :.!toilet -w 200 -f term -F border<CR>
+
+"}}}
+
 
