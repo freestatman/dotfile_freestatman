@@ -215,9 +215,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'vim-syntastic/syntastic'
 " Plug 'roxma/nvim-yarp'
 " Plug 'sheerun/vim-polyglot'
+" Plug 'chrisbra/Colorizer'
+" Plug 'norcalli/nvim_utils'
 
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'chrisbra/Colorizer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 Plug 'dpelle/vim-LanguageTool'
@@ -234,6 +235,7 @@ Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'rhysd/vim-grammarous'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
@@ -248,6 +250,7 @@ Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-scripts/Align'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-utils/vim-man'
+
 
 " Vim 8 only
 if !has('nvim')
