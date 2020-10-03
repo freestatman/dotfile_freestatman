@@ -573,14 +573,8 @@ function! DisplayPresentationBoundaries()
     endif
 endfunction
 
-" toggles the paste mode
-nmap <C-p> :set paste!<CR>
 " toggles word wrap
-nmap <C-w> :set wrap! linebreak<CR>
-" opens the last buffer
 nnoremap <leader><leader> <C-^>
-" adds a line of <
-nmap <leader>a :normal 20i<<CR>
 " makes Ascii art font
 nmap <leader>f :.!toilet -w 200 -f small<CR>
 " makes Ascii border
