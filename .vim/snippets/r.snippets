@@ -1,4 +1,13 @@
 
+snippet ls
+	ls(.GlobalEnv)
+
+snippet lsp
+	library(${1:usethis}); ls("package:${1:usethis}")
+
+snippet lsf
+	formals(${1:function})
+
 # https://github.com/ThinkR-open/shinysnippets/blob/master/inst/snippets.txt
 snippet module
 	${1:name}ui <- function(id){
