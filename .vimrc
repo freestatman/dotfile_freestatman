@@ -1,4 +1,4 @@
-"  ______                                    __      ___
+"  ______                                    __      ___{{{}}}
 " |  ____|                                   \ \    / (_)
 " | |__ _ __ ___  ___ _ __ ___   __ _ _ __    \ \  / / _ _ __ ___  _ __ ___
 " |  __| '__/ _ \/ _ \ '_ ` _ \ / _` | '_ \    \ \/ / | | '_ ` _ \| '__/ __|
@@ -124,6 +124,7 @@ nmap <leader>qe yiwPa=<ESC>ww
 " set spell
 nmap ss :setlocal spell<CR>
 nmap sns :setlocal nospell<CR>
+hi SpellBad cterm=underline
 
 
 " align code by equal sign
@@ -217,6 +218,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'sheerun/vim-polyglot'
 " Plug 'chrisbra/Colorizer'
 " Plug 'norcalli/nvim_utils'
+" Plug 'beloglazov/vim-online-thesaurus'
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -237,6 +239,7 @@ Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'rhysd/vim-grammarous'
+Plug 'ron89/thesaurus_query.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tomtom/tlib_vim'
@@ -589,3 +592,18 @@ nmap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 "}}}
 
 
+"""""""""""""{{{
+" vim writer
+
+function! Writer ()
+    setlocal spell spelllang=en_us
+    setlocal formatoptions=t1
+    setlocal textwidth=80
+    setlocal noautoindent
+    setlocal shiftwidth=5
+    setlocal tabstop=5
+    setlocal expandtab
+endfunction
+com! WR call Writer()
+
+"""""""""""""}}}
