@@ -3,11 +3,11 @@ snippet ls
 	ls(.GlobalEnv)
 
 snippet lsp
-	library(${1:usethis}); ls("package:${1:usethis}")
+	ls("package:${1:usethis}")
 
 snippet lsf
 	formals(${1:function})
-	
+
 snippet str
 	str(${1:obj}, max.level = 1)
 
@@ -65,14 +65,20 @@ snippet #!
 
 # includes
 snippet lib
-	library(data.table)
-	library(tidyverse)
-	library(glue)
-	library(here)
-	library(janitor)
-	options(tibble.width = Inf)
-	theme_set(theme_bw())
+	if (TRUE)  {   ## libs
+	    library(data.table)
+	    library(glue)
+	    library(here)
+	    library(janitor)
+	    library(tidyverse)
+	    options(tibble.width = Inf)
+	    theme_set(theme_bw())
+	}
 
+snippet ist
+	if (FALSE)  {
+	    install.packages("${1:lib}")
+	}
 
 snippet path
 	options(error=recover)
@@ -86,8 +92,6 @@ snippet library
 	library(${1:lib})
 snippet install
 	install.packages("${1:lib}")
-snippet req
-	require(${1:package})
 snippet source
 	source('${1:file}')
 
