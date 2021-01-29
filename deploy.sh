@@ -32,10 +32,23 @@ PATH=$PATH:~/.local/bin
 #--------------------------------------------------------
 # R and packages
 #--------------------------------------------------------
+# add ubuntu apt R repo sources
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt update
+
+##  check apt source list
+sudo vi /etc/apt/sources.list
+
+## remove previously installed R
+sudo apt-get purge r-base* r-recommended r-cran-*
+sudo apt autoremove
+sudo apt update
+
 sudo apt install -y r-base
+#sudo apt install r-base r-base-core r-recommended r-base-dev
+
 
 # R/tidyverse dependency
 sudo apt install -y libxml2-dev
