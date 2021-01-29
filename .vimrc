@@ -59,6 +59,8 @@ set undodir=~/.vim/undodir
 set undofile
 set wildmenu
 
+set signcolumn=no  " first highlighted row sign column
+
 highlight ColorColumn ctermbg=3 guibg=DarkCyan " :h guibg;  :h ctermbg
 highlight lCursor  ctermbg=3 guifg=DarkCyan    " not working yet
 
@@ -124,7 +126,15 @@ nmap <leader>qe yiwPa=<ESC>ww
 " set spell
 nmap ss :setlocal spell<CR>
 nmap sns :setlocal nospell<CR>
-hi SpellBad cterm=underline
+hi SpellBad cterm=underline ctermbg=011 guifg=#ff0000 guibg=#ffff00
+
+" Spell-check Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+
+" Enable dictionary auto-completion in Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal complete+=kspell
+autocmd FileType gitcommit setlocal complete+=kspell
 
 
 " align code by equal sign
@@ -180,7 +190,7 @@ nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 
 
 " substitute
-noremap ; :
+" noremap ; :
 nnoremap <leader>s :%s///g<left><left>
 noremap <leader>pwd :read !pwd<cr>J
 noremap <leader>vrc :tabnew ~/.vimrc<cr>
@@ -206,27 +216,29 @@ imap <F1> <Esc>
 " plugins {{{
 call plug#begin('~/.vim/plugged')
 
-" Plug 'scrooloose/nerdtree'
+" Plug 'beloglazov/vim-online-thesaurus'
+" Plug 'chrisbra/Colorizer'
+" Plug 'dense-analysis/ale'        " Asynchronous Lint Engine
+" Plug 'dpelle/vim-LanguageTool'
 " Plug 'jaxbot/browserlink.vim'
 " Plug 'jcfaria/Vim-R-plugin'
 " Plug 'junegunn/vim-easy-align'
+" Plug 'morhetz/gruvbox'
+" Plug 'norcalli/nvim_utils'
+" Plug 'roxma/nvim-yarp'
+" Plug 'scrooloose/nerdtree'
+" Plug 'sheerun/vim-polyglot'
 " Plug 'tpope/vim-commentary'
+" Plug 'tweekmonster/gofmt.vim'
 " Plug 'valloric/youcompleteme'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-syntastic/syntastic'
-" Plug 'roxma/nvim-yarp'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'chrisbra/Colorizer'
-" Plug 'norcalli/nvim_utils'
-" Plug 'beloglazov/vim-online-thesaurus'
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dense-analysis/ale'
-Plug 'dpelle/vim-LanguageTool'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'ervandew/screen'
-Plug 'gaalcaras/ncm-R'
+Plug 'gaalcaras/ncm-R'          "Asynchronous R completion for Neovim and vim 8
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'jalvesaq/Nvim-R'
@@ -234,7 +246,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
 Plug 'ncm2/ncm2'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " needs git v2+
 Plug 'norcalli/nvim-colorizer.lua'
@@ -246,13 +257,15 @@ Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-surround'
-Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-scripts/Align'
-Plug 'vim-syntastic/syntastic'
 Plug 'vim-utils/vim-man'
+
+" set to version 1
+" The legacy SnipMate parser is deprecated. Please see :h SnipMate-deprecate.
+let g:snipMate = { 'snippet_version' : 1 }
 
 
 " Vim 8 only
@@ -265,8 +278,8 @@ call plug#end()
 
 
 " colorscheme - gruvbox {{{
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'light' " dark or light or mederate
+" colorscheme gruvbox
 "}}}
 
 
@@ -276,7 +289,15 @@ let r_syntax_folding = 1
 let R_assign=3
 let g:r_indent_align_args = 1  " :h ft-r-indent
 let g:r_indent_comment_column = '#'
-let g:syntastic_r_checkers = 1
+
+" lintr via syntastic plugin
+let g:syntastic_mode_map = {"mode": "passive"}
+
+" let g:syntastic_enable_r_lintr_checker = 1
+" let g:syntastic_r_checkers = ['lintr']
+" let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
+" let g:syntastic_r_checkers = 1
+"
 let r_indent_ess_comments = 1
 let r_indent_op_pattern = '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\)\s*$' "'(+\|-\|\*\|/\|=\|\~\|%\)$'
 let vimrplugin_assign = 0
@@ -500,18 +521,13 @@ endfun
 autocmd BufWritePre * :call TrimWhitespace()
 
 
-" lintr via syntastic plugin
-"  let g:syntastic_enable_r_lintr_checker = 0
-"  let g:syntastic_r_checkers = ['styler']
-"  let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
-"
-"  let g:ale_fixers = {
-"              \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"              \   'javascript': ['eslint'],
-"              \   'R': ['styler'],
-"              \   'r': ['styler'],
-"              \}
-"
+let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'javascript': ['eslint'],
+            \   'R': ['lintr'],
+            \   'r': ['lintr'],
+            \}
+
 "  function! s:check_back_space() abort
 "        let col = col('.') - 1
 "          return !col || getline('.')[col - 1]  =~# '\s'
@@ -587,17 +603,16 @@ nmap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 
 
 """""""""""""{{{
-" vim writer
-
-function! Writer ()
-    setlocal spell spelllang=en_us
-    setlocal formatoptions=t1
-    setlocal textwidth=80
-    setlocal noautoindent
-    setlocal shiftwidth=5
-    setlocal tabstop=5
-    setlocal expandtab
-endfunction
-com! WR call Writer()
-
+"" vim writer
+"" function! Writer ()
+""     setlocal spell spelllang=en_us
+""     setlocal formatoptions=t1
+""     setlocal textwidth=80
+""     setlocal noautoindent
+""     setlocal shiftwidth=5
+""     setlocal tabstop=5
+""     setlocal expandtab
+"" endfunction
+"" com! WR call Writer()
 """""""""""""}}}
+
