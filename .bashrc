@@ -23,7 +23,7 @@ export EDITOR="vim"
 export HISTFILESIZE=2000
 export HISTIGNORE=' *:ls:lt:pwd:clear:cd:q:b:h:fg:e:ll:tp:td:tr:sl:R:qA:qB:qstat:w:who:..:screen'
 export HISTSIZE=100000
-export PATH=$PATH:$HOME/.local/bin:$HOME/local/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/local/bin:/usr/local/go/bin
 set -o vi
 
 force_color_prompt=yes
