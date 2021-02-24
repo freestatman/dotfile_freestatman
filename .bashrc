@@ -564,12 +564,6 @@ fmtrdir ()
 #}}}
 
 
-## jump to fish as default, if installed in the system
-if [ -f /etc/fish/config.fish ]; then
-    fish
-fi
-
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -585,4 +579,19 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+
+# vscode {{{
+
+export PATH=$PATH:/mnt/c/Users/swa/AppData/Local/Programs/Microsoft\ VS\ Code/bin/
+
+#}}}
+
+
+## jump to fish as default, if installed in the system
+if [ -f /etc/fish/config.fish ]; then
+    fish
+fi
+
 

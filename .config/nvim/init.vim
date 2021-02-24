@@ -3,5 +3,5 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 " init colorizer.lua
-lua require'colorizer'.setup()
+" lua require'colorizer'.setup()
 
