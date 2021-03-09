@@ -40,7 +40,8 @@ set incsearch              " Incremental search
 set laststatus=2
 set nobackup
 set nocompatible
-set noerrorbells
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 set noshowmatch
 set noswapfile
 set nowrap
@@ -218,7 +219,6 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'beloglazov/vim-online-thesaurus'
 " Plug 'chrisbra/Colorizer'
-" Plug 'dense-analysis/ale'        " Asynchronous Lint Engine
 " Plug 'dpelle/vim-LanguageTool'
 " Plug 'jaxbot/browserlink.vim'
 " Plug 'jcfaria/Vim-R-plugin'
@@ -234,6 +234,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-syntastic/syntastic'
 
+Plug 'dense-analysis/ale'        " Asynchronous Lint Engine
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ekalinin/Dockerfile.vim'
@@ -290,14 +291,9 @@ let R_assign=3
 let g:r_indent_align_args = 1  " :h ft-r-indent
 let g:r_indent_comment_column = '#'
 
-" lintr via syntastic plugin
-let g:syntastic_mode_map = {"mode": "passive"}
+" lintr via ale plugin
+let g:ale_r_lintr_options = "with_defaults(line_length_linter(100))"
 
-" let g:syntastic_enable_r_lintr_checker = 1
-" let g:syntastic_r_checkers = ['lintr']
-" let g:syntastic_r_lintr_linters = "with_defaults(line_length_linter(120))"
-" let g:syntastic_r_checkers = 1
-"
 let r_indent_ess_comments = 1
 let r_indent_op_pattern = '\(&\||\|+\|-\|\*\|/\|=\|\~\|%\|->\)\s*$' "'(+\|-\|\*\|/\|=\|\~\|%\)$'
 let vimrplugin_assign = 0
@@ -524,8 +520,8 @@ autocmd BufWritePre * :call TrimWhitespace()
 let g:ale_fixers = {
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \   'javascript': ['eslint'],
-            \   'R': ['lintr'],
-            \   'r': ['lintr'],
+            \   'R': ['styler'],
+            \   'r': ['styler'],
             \}
 
 "  function! s:check_back_space() abort
