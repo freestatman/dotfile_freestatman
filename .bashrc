@@ -1,5 +1,5 @@
 
-#  aliases {{{
+# aliases {{{
 
 # use vim if nvim is not available in the system
 # bash syntax
@@ -12,7 +12,7 @@ source ~/.aliases
 #}}}
 
 
-#  prompt and environment variables {{{
+# prompt and environment variables {{{
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -288,7 +288,6 @@ function mdqa()
 }
 
 
-#----------------------------------------------------------------------------
 function sy
 {
     if [ -f .conf ] ; then
@@ -551,13 +550,13 @@ fi
 
 fmtrcode ()
 {
-    R -e "styler::style_file(path=\"$1\", strict = FALSE, indent = 4)"
+    R -e "styler::style_file(path=\"$1\", strict = FALSE, indent = 2)"
 }
 
 
 fmtrdir ()
 {
-    R -e 'styler::style_dir(strict = FALSE, indent = 4, recursive = FALSE)'
+    R -e 'styler::style_dir(strict = FALSE, indent = 2, recursive = FALSE)'
 }
 
 #}}}
@@ -578,30 +577,34 @@ riv() {
 rip() {
     Rscript -e 'install.packages("'"$1"'", Ncpus=parallel::detectCores())'
 }
+
 roxy() {
     Rscript -e 'devtools::document("'"$1"'")'
 }
+
 rcheck() {
     Rscript -e 'devtools::check("'"$1"'")'
 }
+
 rgp() {
     Rscript -e 'goodpractice::gp("'"$1"'")'
 }
+
 rcov() {
     Rscript -e 'covr::package_coverage("'"$1"'")'
 }
+
 rtest() {
     Rscript -e 'devtools::test("'"$1"'")'
 }
+
 rfcheck() {
     Rscript -e 'devtools::check("'"$1"'", document = FALSE, args = c("--no-install", "--ignore-vignettes", "--no-manual"), build_args = c("--no-build-vignettes", "--no-manual"))'
 }
+
 rlint() {
     Rscript -e 'lintr::lint_package("'"$1"'")'
 }
-
-
-
 
 
 ## jump to fish as default, if installed in the system
@@ -609,20 +612,4 @@ if [ -f /etc/fish/config.fish ]; then
     fish
 fi
 
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/freeman/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/freeman/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/freeman/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/freeman/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
