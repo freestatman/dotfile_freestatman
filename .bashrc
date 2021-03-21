@@ -560,8 +560,48 @@ fmtrdir ()
     R -e 'styler::style_dir(strict = FALSE, indent = 4, recursive = FALSE)'
 }
 
-
 #}}}
+
+
+create_prj () {
+    R -e 'usethis::create_project("'"$1"'")'
+}
+
+create_golem () {
+    R -e 'golem::create_golem("'"$1"'")'
+}
+
+riv() {
+    Rscript -e 'remotes::install_version("'"$1"'", "'"$2"'", Ncpus=parallel::detectCores())'
+}
+
+rip() {
+    Rscript -e 'install.packages("'"$1"'", Ncpus=parallel::detectCores())'
+}
+roxy() {
+    Rscript -e 'devtools::document("'"$1"'")'
+}
+rcheck() {
+    Rscript -e 'devtools::check("'"$1"'")'
+}
+rgp() {
+    Rscript -e 'goodpractice::gp("'"$1"'")'
+}
+rcov() {
+    Rscript -e 'covr::package_coverage("'"$1"'")'
+}
+rtest() {
+    Rscript -e 'devtools::test("'"$1"'")'
+}
+rfcheck() {
+    Rscript -e 'devtools::check("'"$1"'", document = FALSE, args = c("--no-install", "--ignore-vignettes", "--no-manual"), build_args = c("--no-build-vignettes", "--no-manual"))'
+}
+rlint() {
+    Rscript -e 'lintr::lint_package("'"$1"'")'
+}
+
+
+
 
 
 ## jump to fish as default, if installed in the system
