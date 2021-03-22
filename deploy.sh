@@ -135,17 +135,25 @@ sudo mount -t vboxsf www ~/share
 # install vim Vundle, then you need to :BundleInstall
 # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# switch from Vundle to Plug
-# download & install plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 mkdir -p ~/github/
 cd ~/github/
 
+# install plug.vim
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+    echo "plug.vim dose not exists. Now downloading to ~/.vim/autoload/plug.vim"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 # clone and map rc files
-git clone https://github.com/freestatman/dotfile_freestatman ~/github/dotfile_freestatman
+if [ ! -d ~/github/dotfile_freestatman ]; then
+    echo "freestatman dot repo dose not exists. Now downloading to ~/github/dotfile_freestatman"
+    git clone https://github.com/freestatman/dotfile_freestatman ~/github/dotfile_freestatman
+fi
+
+# goto working dir
 cd ~/github/dotfile_freestatman
+git pull
 
 mkdir -p ~/.config/fish/
 mkdir -p ~/.config/nvim/
@@ -163,13 +171,11 @@ ln -fs $PWD/.screenrc ~/
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/plugged/vim-snippets/snippets/
 ln -fs $PWD/.vimrc ~/
 ln -fs $PWD/.vimrc.more ~/
+ln -fs $PWD/.lintr ~/
+ln -fs $PWD/rstudio-prefs.json ~/
 
 
-# install i3 window manager
-# after the installation, log out and log back in
-#sudo apt update
-#sudo apt install i3 #sudo apt-get install arandr # GUI for setting moniter resolution
-
+# git config
 git config --global user.email "shuaichengwang@gmail.com"
 git config --global user.name "Freeman Wang"
 git config --global diff.tool "vimdiff3"

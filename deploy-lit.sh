@@ -1,10 +1,19 @@
-# download & install plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# install plug.vim
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+    echo "plug.vim dose not exists. Now downloading to ~/.vim/autoload/plug.vim"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 # clone and map rc files
-git clone https://github.com/freestatman/dotfile_freestatman ~/github/dotfile_freestatman
+if [ ! -d ~/github/dotfile_freestatman ]; then
+    echo "freestatman dot repo dose not exists. Now downloading to ~/github/dotfile_freestatman"
+    git clone https://github.com/freestatman/dotfile_freestatman ~/github/dotfile_freestatman
+fi
+
+# goto working dir
 cd ~/github/dotfile_freestatman
+git pull
 
 mkdir -p ~/.config/fish/
 mkdir -p ~/.config/nvim/
@@ -22,6 +31,8 @@ ln -fs $PWD/.screenrc ~/
 ln -fs $PWD/.vim/snippets/r.snippets ~/.vim/plugged/vim-snippets/snippets/
 ln -fs $PWD/.vimrc ~/
 ln -fs $PWD/.vimrc.more ~/
+ln -fs $PWD/.lintr ~/
+ln -fs $PWD/rstudio-prefs.json ~/
 
 
 # git config
